@@ -18,13 +18,9 @@ const TagList = () => {
         <div>
 
             <div className="container">
-                <div className="row justify-content-center">
-
-                    {tags.map((tag) => (
-                        <Tag tag={tag} key={tag.id} />
-                    ))}
-
-                </div>
+                {tags.map((tag) => (
+                    <Tag tag={tag} key={tag.id} />
+                ))}
             </div>
         </div>
     );
