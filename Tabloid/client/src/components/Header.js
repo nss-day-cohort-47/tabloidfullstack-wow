@@ -15,6 +15,8 @@ export default function Header({ isLoggedIn }) {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
 
+
+
   return (
     <div>
       <Navbar color="light" light expand="md">
@@ -29,7 +31,10 @@ export default function Header({ isLoggedIn }) {
                   <NavLink tag={RRNavLink} to="/">Home</NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink tag={RRNavLink} to="/post">Posts</NavLink>
+                  <NavLink tag={RRNavLink} to="/post">All Posts</NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink tag={RRNavLink} to="/user/:id">My Posts</NavLink>
                 </NavItem>
               </>
             }

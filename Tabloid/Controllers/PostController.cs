@@ -2,7 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Tabloid.Models;
 using Tabloid.Repositories;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -14,10 +16,12 @@ namespace Tabloid.Controllers
     public class PostController : ControllerBase
     {
         private readonly IPostRepository _postRepository;
+        private readonly IUserProfileRepository _userProfileRepository;
 
-        public PostController(IPostRepository postRepository)
+        public PostController(IPostRepository postRepository, IUserProfileRepository userProfileRepository)
         {
             _postRepository = postRepository;
+            _userProfileRepository = userProfileRepository;
         }
 
         // GET: api/<PostController>
@@ -39,6 +43,20 @@ namespace Tabloid.Controllers
             return Ok(post);
         }
 
+        // GET api/<PostController>/5
+        [HttpGet("user/{currentUserProfile}")]
+        public IActionResult GetPostsByUserId(int id)
+        {
+            var currentUserProfile = GetCurrentUserProfile();
+            var posts = _postRepository.GetAllPostsFromUser(id);
+            if (posts == null)
+            {
+                return NotFound();
+            }
+            
+            return Ok(posts);
+        }
+
         //// POST api/<PostController>
         //[HttpPost]
         //public void Post([FromBody] string value)
@@ -56,5 +74,11 @@ namespace Tabloid.Controllers
         //public void Delete(int id)
         //{
         //}
+
+        private UserProfile GetCurrentUserProfile()
+        {
+            var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            return _userProfileRepository.GetByFirebaseUserId(firebaseUserId);
+        }
     }
 }
