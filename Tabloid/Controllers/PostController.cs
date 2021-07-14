@@ -28,26 +28,16 @@ namespace Tabloid.Controllers
         }
 
         // GET api/<PostController>/5
-        [HttpGet("{id}")]
-        public IActionResult GetPostsByUser(int id)
+        [HttpGet("details/{id}")]
+        public IActionResult GetById(int id)
         {
-            return Ok(_postRepository.GetAllPostsFromUser(id));
+            var post = _postRepository.GetPublishedPostById(id);
+            if (post == null)
+            {
+                return NotFound();
+            }
+            return Ok(post);
         }
-
-        //public IActionResult Details(int id)
-        //{
-        //    var post = _postRepository.GetPublishedPostById(id);
-        //    if (post == null)
-        //    {
-        //        int userId = GetCurrentUserProfileId();
-        //        post = _postRepository.GetUserPostById(id, userId);
-        //        if (post == null)
-        //        {
-        //            return NotFound();
-        //        }
-        //    }
-        //    return View(post);
-        //}
 
         //// POST api/<PostController>
         //[HttpPost]
