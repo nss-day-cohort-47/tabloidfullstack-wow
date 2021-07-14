@@ -332,33 +332,33 @@ namespace Tabloid.Repositories
         {
             return new Post()
             {
-                Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                Title = reader.GetString(reader.GetOrdinal("Title")),
-                Content = reader.GetString(reader.GetOrdinal("Content")),
+                Id = DbUtils.GetInt(reader, "Id"),
+                Title = DbUtils.GetString(reader, "Title"),
+                Content = DbUtils.GetString(reader, "Content"),
                 ImageLocation = DbUtils.GetString(reader, "HeaderImage"),
-                CreateDateTime = reader.GetDateTime(reader.GetOrdinal("CreateDateTime")),
+                CreateDateTime = DbUtils.GetDateTime(reader, "CreateDateTime"),
                 PublishDateTime = DbUtils.GetNullableDateTime(reader, "PublishDateTime"),
-                CategoryId = reader.GetInt32(reader.GetOrdinal("CategoryId")),
+                CategoryId = DbUtils.GetInt(reader, "CategoryId"),
                 Category = new Category()
                 {
-                    Id = reader.GetInt32(reader.GetOrdinal("CategoryId")),
-                    Name = reader.GetString(reader.GetOrdinal("CategoryName"))
+                    Id = DbUtils.GetInt(reader, "CategoryId"),
+                    Name = DbUtils.GetString(reader, "CategoryName")
                 },
-                UserProfileId = reader.GetInt32(reader.GetOrdinal("UserProfileId")),
+                UserProfileId = DbUtils.GetInt(reader, "UserProfileId"),
                 UserProfile = new UserProfile()
                 {
-                    Id = reader.GetInt32(reader.GetOrdinal("UserProfileId")),
-                    FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
-                    LastName = reader.GetString(reader.GetOrdinal("LastName")),
-                    DisplayName = reader.GetString(reader.GetOrdinal("DisplayName")),
-                    Email = reader.GetString(reader.GetOrdinal("Email")),
-                    CreateDateTime = reader.GetDateTime(reader.GetOrdinal("CreateDateTime")),
+                    Id = DbUtils.GetInt(reader, "UserProfileId"),
+                    FirstName = DbUtils.GetString(reader, "FirstName"),
+                    LastName = DbUtils.GetString(reader, "LastName"),
+                    DisplayName = DbUtils.GetString(reader, "DisplayName"),
+                    Email = DbUtils.GetString(reader, "Email"),
+                    CreateDateTime = DbUtils.GetDateTime(reader, "CreateDateTime"),
                     ImageLocation = DbUtils.GetString(reader, "AvatarImage"),
-                    UserTypeId = reader.GetInt32(reader.GetOrdinal("UserTypeId")),
+                    UserTypeId = DbUtils.GetInt(reader, "UserTypeId"),
                     UserType = new UserType()
                     {
-                        Id = reader.GetInt32(reader.GetOrdinal("UserTypeId")),
-                        Name = reader.GetString(reader.GetOrdinal("UserTypeName"))
+                        Id = DbUtils.GetInt(reader, "UserTypeId"),
+                        Name = DbUtils.GetString(reader, "UserTypeName")
                     }
                 }
             };
@@ -420,4 +420,4 @@ namespace Tabloid.Repositories
         //}
     }
 }
-}
+
