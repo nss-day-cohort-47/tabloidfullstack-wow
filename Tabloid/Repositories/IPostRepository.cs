@@ -7,5 +7,7 @@ namespace Tabloid.Repositories
     {
         void Add(Post post);
         List<Post> GetAllPublishedPosts();
+
+        List<Post> GetAllPostsFromUser(int userProfileId)
     }
 }
