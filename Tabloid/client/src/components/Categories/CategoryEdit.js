@@ -1,14 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
-import { addCategory } from "../../modules/categoryManager";
+import { getCategoryById, updateCategory } from "../../modules/categoryManager";
 
-const CategoryForm = () => {
-    const emptyCategory = {
-        name: ''
-    };
-
-    const [category, setCategory] = useState(emptyCategory);
+const CategoryEdit = () => {
+    const [category, setCategory] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const { id } = useParams();
     const history = useHistory();
 
     const handleInputChange = (evt) => {
@@ -21,22 +19,29 @@ const CategoryForm = () => {
         setCategory(categoryCopy);
     };
 
-    const handleSave = (evt) => {
+    const handleUpdate = (evt) => {
         evt.preventDefault();
-
-        addCategory(category).then((c) => {
+        setIsLoading(true);
+        const editedCategory = {
+            id: category.id,
+            name: category.name
+        };
+        updateCategory(editedCategory).then((c) => {
             history.push("/category");
         });
 
-
-
     };
-
-
+    useEffect(() => {
+        getCategoryById(id)
+            .then(c => {
+                setCategory(c);
+                setIsLoading(false)
+            });
+    }, [id])
 
     return (
         <Form>
-            <h2>New Category</h2>
+            <h2>Edit Category</h2>
             <FormGroup>
                 <Label for="name">Name</Label>
                 <Input type="text" name="name" id="name" placeholder="category name"
@@ -44,11 +49,10 @@ const CategoryForm = () => {
                     onChange={handleInputChange} />
             </FormGroup>
 
-            <Button className="btn btn-primary" onClick={handleSave}>Submit</Button>
+            <Button className="btn btn-primary" onClick={handleUpdate}>Submit</Button>
             <Button className="btn btn-primary" onClick={() => history.push(`/category`)}>Cancel</Button>
-
         </Form>
     );
 };
 
-export default CategoryForm;
+export default CategoryEdit;

@@ -43,7 +43,7 @@ export const addCategory = (category) => {
 };
 
 
-export const getCategory = (id) => {
+export const getCategoryById = (id) => {
     return getToken().then((token) => {
 
         return fetch(`${baseUrl}/${id}`, {
