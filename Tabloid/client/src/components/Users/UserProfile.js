@@ -1,17 +1,16 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 import { Card, CardBody } from "reactstrap";
 
-const UserProfile = ({ userProfile }) => {
+const UserProfile = ({ user }) => {
 
 
     return (
         <Card >
             <CardBody>
-                <p>{userProfile.displayName}</p>
-                <p>{userProfile.fullName}</p>
-                <p>{userProfile.userType.name}</p>
+                <p>{user.displayName}</p>
+                <p>{user.fullName}</p>
+                <p>{user.userType.name}</p>
             </CardBody>
 
         </Card>
