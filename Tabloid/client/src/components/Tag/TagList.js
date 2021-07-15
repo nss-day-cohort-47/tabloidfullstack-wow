@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Tag from './Tag';
 import { getAllTags } from "../../modules/tagManager"
 import { Link } from "react-router-dom";
+import { Button } from "reactstrap";
 
 
 const TagList = () => {
@@ -24,6 +25,7 @@ const TagList = () => {
                 {tags.map((tag) => (
                     <Tag tag={tag} key={tag.id} />
                 ))}
+
             </div>
         </div>
     );
