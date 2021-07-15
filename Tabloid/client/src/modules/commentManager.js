@@ -5,13 +5,13 @@ const baseUrl = '/api/comment';
 export const getAllCommentsByPostId = (id) => {
     return getToken().then((token) => {
 
-        return fetch(`${baseUrl}/${id}`, {
+        return fetch(`${baseUrl}/PostId?id=${id}`, {
             method: "GET",
             headers: {
                 Authorization: `Bearer ${token}`
             }
         }).then(resp => {
-            if (resp.ok) {
+            if (!resp.ok) {
                 return resp.json();
             } else {
                 throw new Error("An unknown error occurred while trying to get comments.");

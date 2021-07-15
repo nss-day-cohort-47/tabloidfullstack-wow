@@ -6,10 +6,11 @@ import { getAllCommentsByPostId } from "../../modules/commentManager";
 const CommentList = () => {
 
     const [comments, setComments] = useState([]);
-    const { postId } = useParams();
+    const { id } = useParams();
 
+    // const postId = Id;
     const getCommentsByPostId = () => {
-        getAllCommentsByPostId(postId).then((response) => setComments(response));
+        getAllCommentsByPostId(id).then((response) => setComments(response));
     }
 
     useEffect(() => {

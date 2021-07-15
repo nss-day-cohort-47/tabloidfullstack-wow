@@ -27,7 +27,7 @@ namespace Tabloid.Controllers
         }
 
         // GET api/<CommentController>/5
-        [HttpGet("{id}")]
+        [HttpGet("PostId")]
         public IActionResult GetAllByPostId(int id)
         {
             var comments = _commentRepository.GetAllCommentsByPostId(id);
