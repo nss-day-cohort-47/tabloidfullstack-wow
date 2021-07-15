@@ -17,7 +17,7 @@ export default function TagAddForm() {
     return (
         <Form onSubmit={submitForm}>
             <FormGroup>
-                <Label for="tagText">Add Tag</Label>
+                <Label for="tagText">Create Tag</Label>
                 <Input id="tagText" type="textarea" onChange={event => setTagText(event.target.value)} />
             </FormGroup>
             <FormGroup>
