@@ -5,6 +5,7 @@ import Register from "./Register";
 import Hello from "./Hello";
 import PostList from "./Post/PostList";
 import PostDetails from "./Post/PostDetails";
+import AllPostsFromCurrentUser from "./Post/UserPosts";
 import CommentList from "./Comment/CommentList";
 import CategoryList from "./Categories/CategoryList";
 import CategoryForm from "./Categories/CategoryForm";
@@ -32,6 +33,10 @@ export default function ApplicationViews({ isLoggedIn }) {
           {isLoggedIn ? <PostDetails /> : <Redirect to="/login" />}
         </Route>
 
+        <Route path="/myPosts" exact>
+          {isLoggedIn ? <AllPostsFromCurrentUser /> : <Redirect to="/login" />}
+        </Route>
+
         <Route path="/comment/PostId/:id" exact>
           {isLoggedIn ? <CommentList /> : <Redirect to="/login" />}
         </Route>
@@ -55,7 +60,7 @@ export default function ApplicationViews({ isLoggedIn }) {
         <Route path="/category/add" exact>
           {isLoggedIn ? <CategoryForm /> : <Redirect to="/login" />}
         </Route>
-
+        
         <Route path="/category/:id" exact>
           {isLoggedIn ? <CategoryEdit /> : <Redirect to="/login" />}
         </Route>
