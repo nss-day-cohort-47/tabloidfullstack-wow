@@ -51,7 +51,7 @@ namespace Tabloid.Repositories
             }
         }
 
-        public List<Post> GetAllPostsFromUser(int userProfileId)
+        public List<Post> GetAllPostsFromUser(string firebaseUserId)
         {
             using (var conn = Connection)
             {
@@ -67,14 +67,15 @@ namespace Tabloid.Repositories
                               u.FirstName, u.LastName, u.DisplayName, 
                               u.Email, u.CreateDateTime, u.ImageLocation AS AvatarImage,
                               u.UserTypeId, 
-                              ut.[Name] AS UserTypeName
+                              ut.[Name] AS UserTypeName,
+                              u.FirebaseUserId
                          FROM Post p
                               LEFT JOIN Category c ON p.CategoryId = c.id
                               LEFT JOIN UserProfile u ON p.UserProfileId = u.id
                               LEFT JOIN UserType ut ON u.UserTypeId = ut.id
-                        WHERE p.UserProfileId = @userProfileId
-                        ORDER BY p.CreateDateTime DESC";
-                    DbUtils.AddParameter(cmd, "@userProfileId", userProfileId);
+                        WHERE FirebaseUserId = @FirebaseUserId
+                    ORDER BY p.CreateDateTime DESC";
+                    DbUtils.AddParameter(cmd, "@firebaseUserId", firebaseUserId);
                     var reader = cmd.ExecuteReader();
 
                     var posts = new List<Post>();

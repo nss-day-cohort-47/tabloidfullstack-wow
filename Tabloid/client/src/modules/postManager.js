@@ -38,10 +38,10 @@ export const getPublishedPostById = (id) => {
     });
 };
 
-export const getAllPostsFromCurrentUser = (id) => {
+export const getAllPostsFromCurrentUser = () => {
     return getToken().then((token) => {
 
-        return fetch(`${baseUrl}/user/${id}`, {
+        return fetch(`${baseUrl}/myPosts`, {
             method: "GET",
             headers: {
                 Authorization: `Bearer ${token}`
@@ -50,7 +50,7 @@ export const getAllPostsFromCurrentUser = (id) => {
             if (resp.ok) {
                 return resp.json();
             } else {
-                throw new Error("An unknown error occurred while trying to get post details.");
+                throw new Error("An unknown error occurred while trying to get your posts.");
             }
         });
     });

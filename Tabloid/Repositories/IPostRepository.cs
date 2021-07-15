@@ -9,6 +9,6 @@ namespace Tabloid.Repositories
         List<Post> GetAllPublishedPosts();
         Post GetPublishedPostById(int id);
 
-        List<Post> GetAllPostsFromUser(int userProfileId);
+        List<Post> GetAllPostsFromUser(string firebaseUserId);
     }
 }

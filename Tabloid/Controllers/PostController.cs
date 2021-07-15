@@ -44,11 +44,11 @@ namespace Tabloid.Controllers
         }
 
         // GET api/<PostController>/5
-        [HttpGet("user/{currentUserProfile}")]
-        public IActionResult GetPostsByUserId(int id)
+        [HttpGet("myPosts/")]
+        public IActionResult GetPostsByUserId()
         {
-            var currentUserProfile = GetCurrentUserProfile();
-            var posts = _postRepository.GetAllPostsFromUser(id);
+            string currentUserProfileId = GetCurrentFirebaseUserProfileId();
+            var posts = _postRepository.GetAllPostsFromUser(currentUserProfileId);
             if (posts == null)
             {
                 return NotFound();
@@ -75,6 +75,11 @@ namespace Tabloid.Controllers
         //{
         //}
 
+        private string GetCurrentFirebaseUserProfileId()
+        {
+            string id = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            return id;
+        }
         private UserProfile GetCurrentUserProfile()
         {
             var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
