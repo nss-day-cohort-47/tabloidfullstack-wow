@@ -89,14 +89,9 @@ export const deleteCategory = (id) => {
             headers: {
                 Authorization: `Bearer ${token}`
             }
-        }).then(resp => {
-            if (resp.ok) {
-                return resp.json();
-            } else {
-                throw new Error("An unknown error occurred while trying to delete category.");
-            }
-        });
-    });
+        })
+
+    })
 };
 
 

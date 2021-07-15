@@ -22,6 +22,7 @@ namespace Tabloid.Repositories
                     cmd.CommandText = @"
                             SELECT Id, Name
                             FROM Category
+                            WHERE IsDeleted = 0
                             ORDER BY Name";
 
                     var reader = cmd.ExecuteReader();
@@ -51,8 +52,7 @@ namespace Tabloid.Repositories
                     cmd.CommandText = @"
                           SELECT Id, Name
                           FROM Category
-                          
-                          WHERE Id = @Id
+                          WHERE Id = @Id AND IsDeleted = 0
                           ";
 
                     DbUtils.AddParameter(cmd, "@Id", id);
