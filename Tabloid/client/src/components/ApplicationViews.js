@@ -10,6 +10,7 @@ import CategoryList from "./Categories/CategoryList";
 import CategoryForm from "./Categories/CategoryForm";
 import CategoryEdit from "./Categories/CategoryEdit";
 import TagList from "./Tag/TagList";
+import UserProfileList from "./Users/UserProfileList"
 import TagAddForm from "./Tag/TagAddForm";
 import TagEditForm from "./Tag/TagEditForm";
 
@@ -57,6 +58,10 @@ export default function ApplicationViews({ isLoggedIn }) {
 
         <Route path="/category/:id" exact>
           {isLoggedIn ? <CategoryEdit /> : <Redirect to="/login" />}
+        </Route>
+
+        <Route path="/userProfile" exact>
+          {isLoggedIn ? <UserProfileList /> : <Redirect to="/login" />}
         </Route>
 
         <Route path="/login">
