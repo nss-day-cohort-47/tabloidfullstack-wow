@@ -39,6 +39,7 @@ export const getAllTags = () => {
 // };
 
 export const addTag = (tag) => {
+    debugger
     return getToken().then((token) => {
         return fetch(baseUrl, {
             method: "POST",

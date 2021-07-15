@@ -9,7 +9,7 @@ export default function TagAddForm() {
 
     const submitForm = (event) => {
         event.preventDefault();
-        addTag({ text: tagText })
+        addTag({ name: tagText })
             .then(() => history.push("/tag"))
             .catch((err) => alert(`An error ocurred: ${err.message}`));
     };
@@ -17,7 +17,7 @@ export default function TagAddForm() {
     return (
         <Form onSubmit={submitForm}>
             <FormGroup>
-                <Label for="tagText">Tag</Label>
+                <Label for="tagText">Add Tag</Label>
                 <Input id="tagText" type="textarea" onChange={event => setTagText(event.target.value)} />
             </FormGroup>
             <FormGroup>
