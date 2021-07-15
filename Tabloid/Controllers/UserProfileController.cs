@@ -50,5 +50,16 @@ namespace Tabloid.Controllers
             return Ok(_userProfileRepository.GetAllUsers());
         }
 
+        [HttpGet("details/{id}")]
+        public IActionResult GetUserById(int id)
+        {
+            var user = _userProfileRepository.GetUserById(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return Ok(user);
+        }
+
     }
 }
