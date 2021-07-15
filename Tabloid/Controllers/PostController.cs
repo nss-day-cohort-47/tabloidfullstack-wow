@@ -57,14 +57,25 @@ namespace Tabloid.Controllers
             return Ok(posts);
         }
 
+        //public IActionResult CreatePost(Post post)
+        //{
+        //    _postRepository.Add(post);
+        //    return CreatedAtAction("Get", new { id = post.Id }, post);
+        //}
+
         // POST api/<PostController>
-        [HttpPost("create/")]
+        [HttpPost("add/")]
         public IActionResult CreatePost(Post post)
         {
+            var currentUserProfile = GetCurrentUserProfile();
+            //if (currentUserProfile.UserType.Name != "admin")
+            //{
+            //    return Unauthorized();
+            //}
+            post.UserProfileId = currentUserProfile.Id;
             _postRepository.Add(post);
             return CreatedAtAction("Get", new { id = post.Id }, post);
         }
-
         //// PUT api/<PostController>/5
         //[HttpPut("{id}")]
         //public void Put(int id, [FromBody] string value)

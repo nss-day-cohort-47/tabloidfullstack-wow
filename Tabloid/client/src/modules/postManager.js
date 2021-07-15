@@ -72,7 +72,7 @@ export const addPost = (post) => {
             } else if (resp.status === 401) {
                 throw new Error("Unauthorized");
             } else {
-                throw new Error("An unknown error occurred while trying to save a new category.");
+                throw new Error("An unknown error occurred while trying to save a new post.");
             }
         });
     });

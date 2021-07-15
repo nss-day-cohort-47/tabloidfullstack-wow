@@ -11,6 +11,7 @@ import CategoryForm from "./Categories/CategoryForm";
 import CategoryEdit from "./Categories/CategoryEdit";
 import TagList from "./Tag/TagList";
 import TagAddForm from "./Tag/TagAddForm";
+import PostForm from './Post/PostForm';
 
 export default function ApplicationViews({ isLoggedIn }) {
 
@@ -30,6 +31,10 @@ export default function ApplicationViews({ isLoggedIn }) {
 
         <Route path="/myPosts" exact>
           {isLoggedIn ? <AllPostsFromCurrentUser /> : <Redirect to="/login" />}
+        </Route>
+
+        <Route path="/post/add" exact>
+          {isLoggedIn ? <PostForm /> : <Redirect to="/login" />}
         </Route>
 
         <Route path="/category" exact>
