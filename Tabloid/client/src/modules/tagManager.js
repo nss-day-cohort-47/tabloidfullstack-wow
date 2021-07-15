@@ -38,7 +38,6 @@ export const getTagById = (id) => {
 };
 
 export const addTag = (tag) => {
-    debugger
     return getToken().then((token) => {
         return fetch(baseUrl, {
             method: "POST",
@@ -76,4 +75,16 @@ export const updateTag = (tag) => {
         })
 
     });
+};
+
+export const deleteTag = (id) => {
+    return getToken().then((token) => {
+
+        return fetch(`${baseUrl}/${id}`, {
+            method: "DELETE",
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+    })
 };
