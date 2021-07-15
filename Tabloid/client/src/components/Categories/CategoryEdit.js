@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
-import { getCategoryById, updateCategory } from "../../modules/categoryManager";
+import { getById, updateCategory } from "../../modules/categoryManager";
 
 const CategoryEdit = () => {
     const [editCategory, setEditCategory] = useState([]);
-    // const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const { id } = useParams();
     const history = useHistory();
 
@@ -21,7 +21,7 @@ const CategoryEdit = () => {
 
     const handleUpdate = (evt) => {
         evt.preventDefault();
-        // setIsLoading(true);
+        setIsLoading(true);
         const editedCategory = {
             id: editCategory.id,
             name: editCategory.name
@@ -32,10 +32,10 @@ const CategoryEdit = () => {
 
     };
     useEffect(() => {
-        getCategoryById(id)
+        getById(id)
             .then(c => {
                 setEditCategory(c);
-                // setIsLoading(false)
+                setIsLoading(false)
             });
     }, [id])
 
@@ -53,6 +53,7 @@ const CategoryEdit = () => {
             <Button className="btn btn-primary" onClick={() => history.push(`/category`)}>Cancel</Button>
         </Form>
     );
+
 };
 
 export default CategoryEdit;

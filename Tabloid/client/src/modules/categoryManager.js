@@ -43,7 +43,7 @@ export const addCategory = (category) => {
 };
 
 
-export const getCategoryById = (id) => {
+export const getById = (id) => {
     return getToken().then((token) => {
 
         return fetch(`${baseUrl}/${id}`, {
@@ -64,22 +64,19 @@ export const getCategoryById = (id) => {
 export const updateCategory = (category) => {
     return getToken().then((token) => {
 
-        return fetch(`${baseUrl}/${category.Id}`, {
+        return fetch(`${baseUrl}/${category.id}`, {
             method: "PUT",
             headers: {
                 Authorization: `Bearer ${token}`,
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(category)
-        }).then(resp => {
-            if (resp.ok) {
-                return resp.json();
-            } else if (resp.status === 401) {
-                throw new Error("Unauthorized");
-            } else {
-                throw new Error("An unknown error occurred while trying to save a new category.");
+        }).then((res) => {
+            if (!res.ok) {
+                window.alert('You are unable to edit this post.');
             }
-        });
+        })
+
     });
 };
 

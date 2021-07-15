@@ -32,7 +32,7 @@ export default function ApplicationViews({ isLoggedIn }) {
         <Route path="/category/add" exact>
           {isLoggedIn ? <CategoryForm /> : <Redirect to="/login" />}
         </Route>
-        <Route path="/category/edit" exact>
+        <Route path="/category/:id" exact>
           {isLoggedIn ? <CategoryEdit /> : <Redirect to="/login" />}
         </Route>
 
