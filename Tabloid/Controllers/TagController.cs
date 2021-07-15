@@ -64,11 +64,13 @@ namespace Tabloid.Controllers
             return NoContent();
         }
 
-        //// DELETE api/<TagController>/5
-        //[HttpDelete("{id}")]
-        //public void Delete(int id)
-        //{
-        //}
+        // DELETE api/<TagController>/5
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+                _tagRepository.DeleteTag(id);
+            return NoContent();
+        }
 
     }
 }
