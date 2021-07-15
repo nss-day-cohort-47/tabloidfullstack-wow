@@ -57,11 +57,13 @@ namespace Tabloid.Controllers
             return Ok(posts);
         }
 
-        //// POST api/<PostController>
-        //[HttpPost]
-        //public void Post([FromBody] string value)
-        //{
-        //}
+        // POST api/<PostController>
+        [HttpPost("create/")]
+        public IActionResult CreatePost(Post post)
+        {
+            _postRepository.Add(post);
+            return CreatedAtAction("Get", new { id = post.Id }, post);
+        }
 
         //// PUT api/<PostController>/5
         //[HttpPut("{id}")]
