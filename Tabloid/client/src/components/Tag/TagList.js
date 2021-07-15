@@ -16,7 +16,7 @@ const TagList = () => {
 
     return (
         <div>
-
+            <button className="btn btn-primary">Add Tag</button>
             <div className="container">
                 {tags.map((tag) => (
                     <Tag tag={tag} key={tag.id} />
