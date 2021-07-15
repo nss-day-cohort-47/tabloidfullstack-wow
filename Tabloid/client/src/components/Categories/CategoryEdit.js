@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { getCategoryById, updateCategory } from "../../modules/categoryManager";
 
 const CategoryEdit = () => {
-    const [category, setCategory] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
+    const [editCategory, setEditCategory] = useState([]);
+    // const [isLoading, setIsLoading] = useState(false);
     const { id } = useParams();
     const history = useHistory();
 
@@ -13,18 +13,18 @@ const CategoryEdit = () => {
         const value = evt.target.value;
         const key = evt.target.id;
 
-        const categoryCopy = { ...category };
+        const categoryCopy = { ...editCategory };
 
         categoryCopy[key] = value;
-        setCategory(categoryCopy);
+        setEditCategory(categoryCopy);
     };
 
     const handleUpdate = (evt) => {
         evt.preventDefault();
-        setIsLoading(true);
+        // setIsLoading(true);
         const editedCategory = {
-            id: category.id,
-            name: category.name
+            id: editCategory.id,
+            name: editCategory.name
         };
         updateCategory(editedCategory).then((c) => {
             history.push("/category");
@@ -34,8 +34,8 @@ const CategoryEdit = () => {
     useEffect(() => {
         getCategoryById(id)
             .then(c => {
-                setCategory(c);
-                setIsLoading(false)
+                setEditCategory(c);
+                // setIsLoading(false)
             });
     }, [id])
 
@@ -45,7 +45,7 @@ const CategoryEdit = () => {
             <FormGroup>
                 <Label for="name">Name</Label>
                 <Input type="text" name="name" id="name" placeholder="category name"
-                    value={category.name}
+                    value={editCategory.name}
                     onChange={handleInputChange} />
             </FormGroup>
 

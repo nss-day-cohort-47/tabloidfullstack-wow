@@ -8,23 +8,23 @@ const CategoryForm = () => {
         name: ''
     };
 
-    const [category, setCategory] = useState(emptyCategory);
+    const [newCategory, setNewCategory] = useState(emptyCategory);
     const history = useHistory();
 
     const handleInputChange = (evt) => {
         const value = evt.target.value;
         const key = evt.target.id;
 
-        const categoryCopy = { ...category };
+        const categoryCopy = { ...newCategory };
 
         categoryCopy[key] = value;
-        setCategory(categoryCopy);
+        setNewCategory(categoryCopy);
     };
 
     const handleSave = (evt) => {
         evt.preventDefault();
 
-        addCategory(category).then((c) => {
+        addCategory(newCategory).then((c) => {
             history.push("/category");
         });
 
@@ -40,7 +40,7 @@ const CategoryForm = () => {
             <FormGroup>
                 <Label for="name">Name</Label>
                 <Input type="text" name="name" id="name" placeholder="category name"
-                    value={category.name}
+                    value={newCategory.name}
                     onChange={handleInputChange} />
             </FormGroup>
 
