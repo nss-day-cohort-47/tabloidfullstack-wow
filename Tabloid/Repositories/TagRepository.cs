@@ -5,6 +5,7 @@ using System.Reflection.PortableExecutable;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using Tabloid.Models;
+using Tabloid.Utils;
 
 namespace Tabloid.Repositories
 {
@@ -37,36 +38,38 @@ namespace Tabloid.Repositories
                 }
             }
         }
-        //public Tag GetTagById(int id)
-        //{
-        //    using (var conn = Connection)
-        //    {
-        //        conn.Open();
-        //        using (var cmd = conn.CreateCommand())
-        //        {
-        //            cmd.CommandText = @"
-        //               SELECT t.Id,
-        //                      t.Name
-        //                 FROM Tag t
-        //                WHERE t.id = @id";
 
-        //            cmd.Parameters.AddWithValue("@id", id);
+        public Tag GetTagById(int id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                       SELECT t.Id,
+                              t.Name
+                         FROM Tag t
+                        WHERE t.id = @id";
 
-        //            var reader = cmd.ExecuteReader();
+                    DbUtils.AddParameter(cmd, "@id", id);
 
-        //            Tag tag = null;
+                    var reader = cmd.ExecuteReader();
 
-        //            if (reader.Read())
-        //            {
-        //                tag = NewTagFromReader(reader);
-        //            }
+                    Tag tag = null;
 
-        //            reader.Close();
+                    if (reader.Read())
+                    {
+                        tag = NewTagFromReader(reader);
+                    }
 
-        //            return tag;
-        //        }
-        //    }
-        //}
+                    reader.Close();
+
+                    return tag;
+                }
+            }
+        }
+
         //public void AddTagToPost(int tag, int post)
         //{
         //    using (SqlConnection conn = Connection)
@@ -127,27 +130,27 @@ namespace Tabloid.Repositories
             }
         }
 
-        //public void UpdateTag(Tag tag)
-        //{
-        //    using (SqlConnection conn = Connection)
-        //    {
-        //        conn.Open();
+        public void UpdateTag(Tag tag)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
 
-        //        using (SqlCommand cmd = conn.CreateCommand())
-        //        {
-        //            cmd.CommandText = @"
-        //                    UPDATE Tag
-        //                    SET 
-        //                        [Name] = @name
-        //                    WHERE Id = @id";
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                            UPDATE Tag
+                            SET 
+                                [Name] = @name
+                            WHERE Id = @id";
 
-        //            cmd.Parameters.AddWithValue("@name", tag.Name);
-        //            cmd.Parameters.AddWithValue("@id", tag.Id);
+                   DbUtils.AddParameter(cmd, "@name", tag.Name);
+                    DbUtils.AddParameter(cmd, "@id", tag.Id);
 
-        //            cmd.ExecuteNonQuery();
-        //        }
-        //    }
-        //}
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
         //public void DeleteTag(int tagId)
         //{
         //    using (SqlConnection conn = Connection)
@@ -174,8 +177,8 @@ namespace Tabloid.Repositories
         {
             return new Tag()
             {
-                Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                Name = reader.GetString(reader.GetOrdinal("Name"))
+                Id = DbUtils.GetInt(reader, "Id"),
+                Name = DbUtils.GetString(reader, "Name")
             };
         }
     }
