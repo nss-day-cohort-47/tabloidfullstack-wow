@@ -23,7 +23,7 @@ namespace Tabloid.Repositories
                        SELECT p.Id, p.Title, p.Content, 
                               p.ImageLocation AS HeaderImage,
                               p.CreateDateTime, p.PublishDateTime, p.IsApproved,
-                              p.CategoryId, p.UserProfileId, p.IsDeleted,
+                              p.CategoryId, p.UserProfileId, p.IsDeleted AS PostDeleted,
                               c.[Name] AS CategoryName,
                               u.FirstName, u.LastName, u.DisplayName, 
                               u.Email, u.CreateDateTime, u.ImageLocation AS AvatarImage,
@@ -208,7 +208,7 @@ namespace Tabloid.Repositories
                    SELECT p.Id, p.Title, p.Content, 
                           p.ImageLocation AS HeaderImage,
                           p.CreateDateTime, p.PublishDateTime, p.IsApproved,
-                          p.CategoryId, p.UserProfileId, p.IsDeleted,
+                          p.CategoryId, p.UserProfileId, p.IsDeleted AS PostDeleted,
                           c.[Name] AS CategoryName,
                           u.FirstName, u.LastName, u.DisplayName, 
                           u.Email, u.CreateDateTime, u.ImageLocation AS AvatarImage,
@@ -218,7 +218,7 @@ namespace Tabloid.Repositories
                           LEFT JOIN Category c ON p.CategoryId = c.id
                           LEFT JOIN UserProfile u ON p.UserProfileId = u.id
                           LEFT JOIN UserType ut ON u.UserTypeId = ut.id
-                    WHERE IsApproved = 1 AND PublishDateTime < SYSDATETIME() AND IsDeleted = 0
+                    WHERE IsApproved = 1 AND PublishDateTime < SYSDATETIME() AND p.IsDeleted = 0
                           AND p.id = @id";
 
                     DbUtils.AddParameter(cmd, "@id", id);
