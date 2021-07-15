@@ -11,7 +11,7 @@ export const getAllCommentsByPostId = (id) => {
                 Authorization: `Bearer ${token}`
             }
         }).then(resp => {
-            if (!resp.ok) {
+            if (resp.ok) {
                 return resp.json();
             } else {
                 throw new Error("An unknown error occurred while trying to get comments.");

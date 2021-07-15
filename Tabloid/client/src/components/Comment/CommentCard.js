@@ -7,11 +7,11 @@ const CommentCard = ({ comment }) => {
         <Card>
             <CardBody>
                 <CardTitle>
-                    <strong>{comment.subject}</strong>
+                    <strong>Subject: {comment.subject}</strong>
                 </CardTitle>
                 <CardText>
                     <p>Author: {comment.userProfile.displayName}</p>
-                    {comment.content}
+                    <p>Comment: {comment.content}</p>
                     <hr />
                     <p>Created On: {comment.createDateTime}</p>
                 </CardText>

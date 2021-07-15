@@ -3,6 +3,7 @@ import { useParams } from "react-router";
 import CommentCard from './CommentCard';
 import { getAllCommentsByPostId } from "../../modules/commentManager";
 
+
 const CommentList = () => {
 
     const [comments, setComments] = useState([]);
@@ -19,9 +20,9 @@ const CommentList = () => {
 
     return (
         <div>
-            {comments.map((comment) => {
+            {comments.map((comment) =>
                 <CommentCard comment={comment} key={comment.id} />
-            })}
+            )}
         </div>
     );
 }
