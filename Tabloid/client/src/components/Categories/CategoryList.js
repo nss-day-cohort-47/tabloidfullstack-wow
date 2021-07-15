@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Category from "./Category";
 import { Link } from "react-router-dom";
-import { getAllCategories } from "../../modules/categoryManager";
+import { getAllCategories, deleteCategory } from "../../modules/categoryManager";
 
 const CategoryList = () => {
     const [categories, setCategories] = useState([]);
@@ -9,6 +9,13 @@ const CategoryList = () => {
     const getCategories = () => {
         getAllCategories().then(c => setCategories(c));
     };
+
+    const deleteCat = (id) => {
+
+        deleteCategory(id)
+            .then(() => getCategories())
+
+    }
 
     useEffect(() => {
         getCategories();
@@ -24,7 +31,7 @@ const CategoryList = () => {
                 </Link>
 
                 {categories.map((category) => (
-                    <Category category={category} key={category.id} />
+                    <Category category={category} key={category.id} deleteCat={deleteCat} />
                 ))}
 
             </div>
