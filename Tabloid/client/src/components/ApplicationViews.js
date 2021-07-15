@@ -9,6 +9,7 @@ import CategoryList from "./Categories/CategoryList";
 import CategoryForm from "./Categories/CategoryForm";
 import CategoryEdit from "./Categories/CategoryEdit";
 import TagList from "./Tag/TagList";
+import TagAddForm from "./Tag/TagAddForm";
 
 export default function ApplicationViews({ isLoggedIn }) {
 
@@ -29,8 +30,13 @@ export default function ApplicationViews({ isLoggedIn }) {
         <Route path="/category" exact>
           {isLoggedIn ? <CategoryList /> : <Redirect to="/login" />}
         </Route>
+
         <Route path="/tag" exact>
           {isLoggedIn ? <TagList /> : <Redirect to="/login" />}
+        </Route>
+
+        <Route path="/tag/add" exact>
+          {isLoggedIn ? <TagAddForm /> : <Redirect to="/login" />}
         </Route>
 
         <Route path="/category/add" exact>
