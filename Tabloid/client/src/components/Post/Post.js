@@ -8,10 +8,11 @@ const Post = ({ post }) => {
         <Card >
             <CardBody>
                 <Link to={`/post/details/${postId}`}>
-                <p>{post.title}</p>
+                <p><b>Title: </b>{post.title}</p>
                 </Link>
-                <p>{post.userProfile.displayName}</p>
-                <p>{post.category.name}</p>
+                <p><b>Author: </b>{post.userProfile.fullName}</p>
+                <p><b>Category: </b>{post.category.name}</p>
+                
             </CardBody>
         </Card>
     );
