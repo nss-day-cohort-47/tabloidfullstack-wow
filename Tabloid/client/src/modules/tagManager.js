@@ -37,6 +37,24 @@ export const getTagById = (id) => {
     });
 };
 
+export const getAllTagsByPostId = (postId) => {
+    return getToken().then((token) => {
+        return fetch(`${baseUrl}/getAllTagsByPostId`, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then(resp => {
+            if (resp.ok) {
+                return resp.json();
+            } else {
+                throw new Error("An unknown error occurred while trying to get Tags.");
+            }
+        });
+    });
+};
+
+
 export const addTag = (tag) => {
     return getToken().then((token) => {
         return fetch(baseUrl, {

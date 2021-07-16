@@ -4,22 +4,22 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import { getPublishedPostById } from "../../modules/postManager";
 import { Link } from "react-router-dom";
+import { getAllTagsByPostId } from "../../modules/tagManager";
 
 
 const PostDetails = () => {
     const [postDetails, setPostDetails] = useState({});
-    const [postTags, setPostTags] = useState([]);
-    const [tags, setTags] = useState([]);
+    const [tagsList, setTagsList] = useState([]);
     const { id } = useParams();
 
     //get the tag ids associated with the post
-    //fetch tags by id for each tag id. Store in an array 
+
     //display tag name in the JSX
 
-    //Setting state for array of postTags
-    const getPostTag = () => {
-        getAllPostTags(postDetails.id)
-            .then(res => setPostTags(res))
+    //Setting state for array of tags
+    const getTags = () => {
+        getAllTagsByPostId(id)
+            .then(res => setTagsList(res))
     }
 
     const getPostDetails = () => {
@@ -28,6 +28,7 @@ const PostDetails = () => {
     }
 
     useEffect(() => {
+        getTags();
         getPostDetails();
     }, []);
 
@@ -45,7 +46,11 @@ const PostDetails = () => {
                 <Link to={`/tag/addtag/${postDetails.id}`}>
                     <button>Manage Tags</button>
                 </Link>
-                <strong>Tags</strong>
+                <div>
+                    <strong>Tags</strong>
+
+                </div>
+
             </CardBody>
         </Card>
     );

@@ -70,6 +70,42 @@ namespace Tabloid.Repositories
             }
         }
 
+        public List<Tag> GetTagsByPostId(int postId)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                          SELECT Distinct t.name, t.id
+                            from Tag t 
+                            LEFT JOIN PostTag pt ON t.id = pt.TagId
+                            LEFT JOIN Post p ON pt.PostId = p.id
+                              where p.id = @id";
+
+                    DbUtils.AddParameter(cmd, "@id", postId);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    List<Tag> tags = new List<Tag>();
+
+                    while (reader.Read())
+                    {
+                        tags.Add(new Tag()
+                        {
+                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            Name = reader.GetString(reader.GetOrdinal("Name"))
+                        }
+                        );
+
+                    }
+                    reader.Close();
+                    return tags;
+                }
+            }
+        }
+
         public void AddTagToPost(int tagId, int postId)
         {
             using (SqlConnection conn = Connection)
