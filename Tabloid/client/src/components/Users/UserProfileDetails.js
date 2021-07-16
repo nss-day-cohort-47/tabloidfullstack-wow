@@ -14,6 +14,13 @@ const UserProfileDetails = () => {
             .then(setUserDetails)
     }
 
+    const handleDate = () => {
+
+        let date = new Date(userDetails.createDateTime).toDateString();
+        return date;
+    };
+    const image = userDetails.imageLocation
+
     useEffect(() => {
         getUserDetails();
     }, []);
@@ -22,13 +29,12 @@ const UserProfileDetails = () => {
 
         <Card >
             <CardBody>
-                {/* <img alt="image">{userDetails.imageLocation}</img> */}
-
+                <img src={image} />
                 <p>{userDetails.fullName}</p>
 
                 <p>{userDetails.displayName}</p>
                 <p>{userDetails.email}</p>
-                <p>{userDetails.createDateTime}</p>
+                <p>{handleDate()}</p>
                 <p>{userDetails.userType?.name}</p>
             </CardBody>
         </Card>
