@@ -59,7 +59,7 @@ export const getAllPostsFromCurrentUser = () => {
 export const addPost = (post) => {
     return getToken().then((token) => {
 
-        return fetch(baseUrl, {
+        return fetch(`${baseUrl}`, {
             method: "POST",
             headers: {
                 Authorization: `Bearer ${token}`,

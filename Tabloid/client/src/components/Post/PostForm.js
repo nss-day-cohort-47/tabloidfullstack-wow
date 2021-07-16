@@ -6,21 +6,19 @@ import { addPost } from '../../modules/postManager';
 
 const PostForm = () => {
     const emptyPost = {
+        
         title: '',
         content: '',
         imageLocation: '',
-        createDateTime: '',
-        publishDateTime: '',
-        isApproved: '',
-        CategoryId: '',
-        userProfileId: '',
-        isDeleted: ''
+        categoryId: '',
+        
 
     };
 
     const [newPost, setNewPost] = useState(emptyPost);
     const [category, setCategory] = useState([]);
     const history = useHistory();
+ 
 
     const handleInputChange = (evt) => {
         const value = evt.target.value;
@@ -43,7 +41,7 @@ const PostForm = () => {
         evt.preventDefault();
 
         addPost(newPost).then((p) => {
-            history.push("/post/details/:id");
+            history.push(`/post/details/${p.id}`);
         });
     };
 
@@ -69,7 +67,7 @@ const PostForm = () => {
                     onChange={handleInputChange} />
             </FormGroup>
             <FormGroup>
-                <Label for="title">imageLocation </Label>
+                <Label for="title">Header Image URL</Label>
                 <Input type="text" name="imageLocation" id="imageLocation" placeholder="imageLocation"
                     value={newPost.imageLocation}
                     onChange={handleInputChange} />
@@ -85,7 +83,7 @@ const PostForm = () => {
             </FormGroup>         
 
             <Button className="btn btn-primary" onClick={handleSave}>Submit</Button>
-            <Button className="btn btn-primary" onClick={() => history.push(`/post/details/:id`)}>Cancel</Button>
+            <Button className="btn btn-primary" onClick={() => history.push(`/`)}>Cancel</Button>
 
         </Form>
     );
