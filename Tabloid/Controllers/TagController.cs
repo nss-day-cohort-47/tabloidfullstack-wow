@@ -1,15 +1,18 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Tabloid.Models;
+using Tabloid.Models.RequestModels;
 using Tabloid.Repositories;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Tabloid.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class TagController : ControllerBase
@@ -50,6 +53,24 @@ namespace Tabloid.Controllers
             _tagRepository.AddTag(tag);
             return CreatedAtAction(nameof(GetAll), new { id = tag.Id }, tag);
         }
+
+        [HttpPost("AddTagsToPost")]
+        public IActionResult AddTagsToPost(PostTagRequest postTagRequest)
+        {
+            //TODO: Delete all postTags associated with a post.
+            //Create a postTag for each tag id using the postId.
+       
+                int postId = postTagRequest.id;
+            //Iterate through each tag id in the array and create a posttag.
+            foreach (var tagId in postTagRequest.selectedTagIds)
+            {
+                _tagRepository.AddTagToPost(tagId, postId);
+            }
+            return NoContent();
+        }
+
+
+
 
         // PUT api/<TagController>/5
         [HttpPut("{id}")]

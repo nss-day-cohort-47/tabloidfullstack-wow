@@ -58,6 +58,24 @@ export const addTag = (tag) => {
     });
 };
 
+export const saveTagsToPost = (id, selectedTagIds) => {
+    return getToken().then((token) => {
+        return fetch(`${baseUrl}/AddTagsToPost`, {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ id, selectedTagIds })
+        }).then(resp => {
+            if (!resp.ok) {
+                window.alert('You are unable to edit this post.');
+            }
+        })
+
+    });
+};
+
 export const updateTag = (tag) => {
     return getToken().then((token) => {
 

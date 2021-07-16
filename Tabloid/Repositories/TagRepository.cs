@@ -70,26 +70,26 @@ namespace Tabloid.Repositories
             }
         }
 
-        //public void AddTagToPost(int tag, int post)
-        //{
-        //    using (SqlConnection conn = Connection)
-        //    {
-        //        conn.Open();
-        //        using (SqlCommand cmd = conn.CreateCommand())
-        //        {
-        //            cmd.CommandText = @"
-        //            INSERT INTO PostTag (PostId, TagId)
-        //            OUTPUT INSERTED.ID
-        //            VALUES (@postid, @tagid);
-        //        ";
+        public void AddTagToPost(int tagId, int postId)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                    INSERT INTO PostTag (PostId, TagId)
+                    OUTPUT INSERTED.ID
+                    VALUES (@postid, @tagid);
+                ";
+                    DbUtils.AddParameter(cmd, "@postid", postId);
+                    DbUtils.AddParameter(cmd, "@tagid", tagId);
 
-        //            cmd.Parameters.AddWithValue("@postid", post);
-        //            cmd.Parameters.AddWithValue("@tagid", tag);
+                    int id = (int)cmd.ExecuteScalar();
+                }
+            }
+        }
 
-        //            int id = (int)cmd.ExecuteScalar();
-        //        }
-        //    }
-        //}
         //public void RemoveTagFromPost(int tag, int post)
         //{
         //    using (SqlConnection conn = Connection)

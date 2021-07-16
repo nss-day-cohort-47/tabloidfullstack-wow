@@ -30,6 +30,9 @@ const PostDetails = () => {
                 <Link to={`/comment/PostId/${postDetails.id}`}>
                     <button>View Comments</button>
                 </Link>
+                <Link to={`/tag/addtag/${postDetails.id}`}>
+                    <button>Manage Tags</button>
+                </Link>
             </CardBody>
         </Card>
     );

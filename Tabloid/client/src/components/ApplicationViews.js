@@ -14,6 +14,7 @@ import TagList from "./Tag/TagList";
 import UserProfileList from "./Users/UserProfileList"
 import TagAddForm from "./Tag/TagAddForm";
 import TagEditForm from "./Tag/TagEditForm";
+import AddTagToPost from "./Tag/AddTagToPost";
 
 export default function ApplicationViews({ isLoggedIn }) {
 
@@ -53,6 +54,10 @@ export default function ApplicationViews({ isLoggedIn }) {
           {isLoggedIn ? <TagAddForm /> : <Redirect to="/login" />}
         </Route>
 
+        <Route path="/tag/addtag/:id" exact>
+          {isLoggedIn ? <AddTagToPost /> : <Redirect to="/login" />}
+        </Route>
+
         <Route path="/tag/:id" exact>
           {isLoggedIn ? <TagEditForm /> : <Redirect to="/login" />}
         </Route>
@@ -60,7 +65,7 @@ export default function ApplicationViews({ isLoggedIn }) {
         <Route path="/category/add" exact>
           {isLoggedIn ? <CategoryForm /> : <Redirect to="/login" />}
         </Route>
-        
+
         <Route path="/category/:id" exact>
           {isLoggedIn ? <CategoryEdit /> : <Redirect to="/login" />}
         </Route>
