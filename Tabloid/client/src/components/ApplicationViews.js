@@ -14,6 +14,7 @@ import UserProfileList from "./Users/UserProfileList"
 import TagAddForm from "./Tag/TagAddForm";
 import TagEditForm from "./Tag/TagEditForm";
 import UserProfileDetails from "./Users/UserProfileDetails";
+import UserDeactivateList from "./Users/UserDeactivateList";
 
 export default function ApplicationViews({ isLoggedIn }) {
 
@@ -69,6 +70,9 @@ export default function ApplicationViews({ isLoggedIn }) {
           {isLoggedIn ? <UserProfileDetails /> : <Redirect to="/login" />}
         </Route>
 
+        <Route path="/userProfile/deactivated" exact>
+          {isLoggedIn ? <UserDeactivateList /> : <Redirect to="/login" />}
+        </Route>
         <Route path="/login">
           <Login />
         </Route>

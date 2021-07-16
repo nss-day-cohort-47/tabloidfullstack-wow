@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import UserProfile from './UserProfile';
-
+import { Link } from "react-router-dom";
 import { getAllUsers } from "../../modules/userManager";
 
 const UserProfileList = () => {
@@ -19,7 +19,9 @@ const UserProfileList = () => {
     return (
         <div>
             <div className="container">
-
+                <Link to={`/userProfile/deactivated`}>
+                    <button>View Deactivated</button>
+                </Link>
                 {users.map((user) => {
                     return <UserProfile user={user} key={user.id} isSelected={isSelected} />
                 })}
