@@ -208,11 +208,7 @@ namespace Tabloid.Repositories
                    SELECT p.Id, p.Title, p.Content, 
                           p.ImageLocation AS HeaderImage,
                           p.CreateDateTime, p.PublishDateTime, p.IsApproved,
-<<<<<<< HEAD
-                          p.CategoryId, p.UserProfileId, p.IsDeleted as PostIsDeleted,
-=======
                           p.CategoryId, p.UserProfileId, p.IsDeleted AS PostDeleted,
->>>>>>> main
                           c.[Name] AS CategoryName,
                           u.FirstName, u.LastName, u.DisplayName, 
                           u.Email, u.CreateDateTime, u.ImageLocation AS AvatarImage,

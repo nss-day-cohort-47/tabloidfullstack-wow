@@ -10,7 +10,7 @@ const PostForm = () => {
         title: '',
         content: '',
         imageLocation: '',
-        categoryId: '',
+        categoryId: 0
         
 
     };
@@ -40,9 +40,23 @@ const PostForm = () => {
     const handleSave = (evt) => {
         evt.preventDefault();
 
-        addPost(newPost).then((p) => {
-            history.push(`/post/details/${p.id}`);
-        });
+        if (newPost.title === '' || newPost.content === '' || newPost.categoryId === 0 )
+        {
+        window.alert('title, content, and category are required fields')
+        setNewPost({
+            title: '',
+            content: '',
+            imageLocation: '',
+            categoryId: 0
+        })
+        return history.push(`/post/add`);
+        }
+        else 
+        {
+            addPost(newPost).then((p) => {
+                history.push(`/post/details/${p.id}`);
+            });
+        }
     };
 
     useEffect(() => {
