@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
-import { addComment } from "../../modules/commentManager";
+import { addComment, getAllCommentsByPostId } from "../../modules/commentManager";
 
 const CommentForm = () => {
 
@@ -24,7 +24,7 @@ const CommentForm = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        addComment(newComment).then(history.push(`/comment/PostId/${id}`));
+        addComment(newComment).then(() => getAllCommentsByPostId(id)).then(() => history.push(`/comment/PostId/${id}`));
     }
 
     return (

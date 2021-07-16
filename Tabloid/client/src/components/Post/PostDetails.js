@@ -1,10 +1,9 @@
 import React from "react";
-import { Card, CardBody } from "reactstrap";
+import { Card, CardBody, Button } from "reactstrap";
 import { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router";
 import { getPublishedPostById } from "../../modules/postManager";
 import { Link } from "react-router-dom";
-import { Button } from "reactstrap";
 
 
 const PostDetails = () => {
