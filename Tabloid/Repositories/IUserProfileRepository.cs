@@ -10,5 +10,6 @@ namespace Tabloid.Repositories
         public List<UserProfile> GetAllUsers();
 
         UserProfile GetUserById(int id);
+        void UpdateUsers(UserProfile userProfile);
     }
 }

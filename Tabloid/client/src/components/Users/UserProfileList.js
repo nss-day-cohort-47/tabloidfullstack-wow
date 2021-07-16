@@ -5,6 +5,7 @@ import { getAllUsers } from "../../modules/userManager";
 
 const UserProfileList = () => {
     const [users, setUsers] = useState([]);
+    let isSelected = false;
 
     const getUsers = () => {
         getAllUsers().then(u => setUsers(u));
@@ -20,7 +21,7 @@ const UserProfileList = () => {
             <div className="container">
 
                 {users.map((user) => {
-                    return <UserProfile user={user} key={user.id} />
+                    return <UserProfile user={user} key={user.id} isSelected={isSelected} />
                 })}
 
             </div>
