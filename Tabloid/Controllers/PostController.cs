@@ -88,10 +88,19 @@ namespace Tabloid.Controllers
         //{
         //}
 
-        //// DELETE api/<PostController>/5
+        //DELETE api/<PostController>/5
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            _postRepository.Delete(id);
+                return NoContent();
+        }
+
         //[HttpDelete("{id}")]
-        //public void Delete(int id)
+        //public IActionResult Delete(int id)
         //{
+        //    _categoryRepository.Delete(id);
+        //    return NoContent();
         //}
 
         private string GetCurrentFirebaseUserProfileId()

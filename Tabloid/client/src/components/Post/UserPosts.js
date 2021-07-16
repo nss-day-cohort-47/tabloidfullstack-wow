@@ -8,8 +8,7 @@ import Post from "./Post";
 
 const AllPostsFromCurrentUser= () => {
     const [posts, setPosts ] = useState([]);
-    // const [postDetails, setPostDetails ] = useState({});
-    // const {id} = useParams();
+   
 
     const getAllPostsFromUser = () => {
         getAllPostsFromCurrentUser()
@@ -17,15 +16,9 @@ const AllPostsFromCurrentUser= () => {
         
     }
 
-    // const getPostDetails = () => {
-    //     getPublishedPostById(id)
-    //     .then(setPostDetails)
-    // }
-    
-
     useEffect(() => {
         getAllPostsFromUser()
-        // getPostDetails()
+       
     }, []);
 
     return (
@@ -33,7 +26,7 @@ const AllPostsFromCurrentUser= () => {
             <CardBody>
             <div className="row justify-content-center">
                 {posts.map((post) => (
-                    <Post post={post} key={post.id} />
+                    <Post post={post} key={post.id} showEditAndDelete={true}/>
                 ))}
             </div>
             </CardBody>

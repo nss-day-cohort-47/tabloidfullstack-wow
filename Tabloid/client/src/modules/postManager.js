@@ -77,3 +77,16 @@ export const addPost = (post) => {
         });
     });
 };
+
+export const deletePost = (id) => {
+    return getToken().then((token) => {
+
+        return fetch(`${baseUrl}/${id}`, {
+            method: "DELETE",
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+
+    })
+};

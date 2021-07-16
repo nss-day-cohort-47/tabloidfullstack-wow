@@ -5,14 +5,11 @@ import { getAllCategories } from "../../modules/categoryManager";
 import { addPost } from '../../modules/postManager';
 
 const PostForm = () => {
-    const emptyPost = {
-        
+    const emptyPost = {       
         title: '',
         content: '',
         imageLocation: '',
         categoryId: 0
-        
-
     };
 
     const [newPost, setNewPost] = useState(emptyPost);
