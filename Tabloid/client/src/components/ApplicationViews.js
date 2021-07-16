@@ -14,6 +14,7 @@ import TagList from "./Tag/TagList";
 import UserProfileList from "./Users/UserProfileList"
 import TagAddForm from "./Tag/TagAddForm";
 import TagEditForm from "./Tag/TagEditForm";
+import UserProfileDetails from "./Users/UserProfileDetails";
 
 export default function ApplicationViews({ isLoggedIn }) {
 
@@ -67,6 +68,10 @@ export default function ApplicationViews({ isLoggedIn }) {
 
         <Route path="/userProfile" exact>
           {isLoggedIn ? <UserProfileList /> : <Redirect to="/login" />}
+        </Route>
+
+        <Route path="/userProfile/details/:id" exact>
+          {isLoggedIn ? <UserProfileDetails /> : <Redirect to="/login" />}
         </Route>
 
         <Route path="/login">
