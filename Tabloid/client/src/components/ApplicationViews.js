@@ -13,12 +13,9 @@ import CategoryEdit from "./Categories/CategoryEdit";
 import TagList from "./Tag/TagList";
 import UserProfileList from "./Users/UserProfileList"
 import TagAddForm from "./Tag/TagAddForm";
-<<<<<<< HEAD
 import CommentForm from "./Comment/CommentAddForm";
-=======
 import TagEditForm from "./Tag/TagEditForm";
 import UserProfileDetails from "./Users/UserProfileDetails";
->>>>>>> origin
 
 export default function ApplicationViews({ isLoggedIn }) {
 
