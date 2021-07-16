@@ -68,6 +68,20 @@ namespace Tabloid.Repositories
             }
         }
 
+        public void DeleteComment(int id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = "DELETE FROM Comment WHERE Id = @id";
+                    DbUtils.AddParameter(cmd, "@id", id);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
 
         private Comment NewCommentFromReader(SqlDataReader reader)
         {
