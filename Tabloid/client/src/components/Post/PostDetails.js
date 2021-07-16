@@ -21,23 +21,21 @@ const PostDetails = () => {
     }, []);
 
     return (
-        <>
-            <Card >
-                <CardBody>
-                    <p>{postDetails.title}</p>
-                    <p>{postDetails.headerImage}</p>
-                    <p>{postDetails.content}</p>
-                    <p>{postDetails.publishDateTime}</p>
-                    <p>{postDetails.userProfile?.displayName}</p>
-                    <Link to={`/comment/PostId/${postDetails.id}`}>
-                        <Button className="btn btn-primary">View Comments</Button>
-                    </Link>
-                    <Link to={`/comment/add/${postDetails.id}`}>
-                        <Button className="btn btn-success">Add Comment</Button>
-                    </Link>
-                </CardBody>
-            </Card>
-        </>
+        <Card >
+            <CardBody>
+                <p><b>Title: </b>{postDetails.title}</p>
+                <p><b>Image: </b>{postDetails.headerImage}</p>
+                <p><b>Content: </b>{postDetails.content}</p>
+                <p><b>Date: </b>{postDetails.publishDateTime}</p>
+                <p><b>Author: </b>{postDetails.userProfile?.fullName}</p>
+                <Link to={`/comment/PostId/${postDetails.id}`}>
+                    <Button className="btn btn-primary">View Comments</Button>
+                </Link>
+                <Link to={`/comment/add/${postDetails.id}`}>
+                    <Button className="btn btn-success">Add Comment</Button>
+                </Link>
+            </CardBody>
+        </Card>
     );
 };
 

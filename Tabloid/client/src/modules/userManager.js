@@ -1,8 +1,10 @@
+
 import { getToken } from "./authManager";
 
-const baseUrl = '/api/post';
+const baseUrl = '/api/userprofile';
 
-export const getAllPosts = () => {
+
+export const getAllUsers = () => {
     return getToken().then((token) => {
 
         return fetch(`${baseUrl}`, {
@@ -14,13 +16,13 @@ export const getAllPosts = () => {
             if (resp.ok) {
                 return resp.json();
             } else {
-                throw new Error("An unknown error occurred while trying to get post.");
+                throw new Error("An unknown error occurred while trying to get videos.");
             }
         });
     });
 };
 
-export const getPublishedPostById = (id) => {
+export const getUserById = (id) => {
     return getToken().then((token) => {
 
         return fetch(`${baseUrl}/details/${id}`, {
@@ -33,24 +35,6 @@ export const getPublishedPostById = (id) => {
                 return resp.json();
             } else {
                 throw new Error("An unknown error occurred while trying to get post details.");
-            }
-        });
-    });
-};
-
-export const getAllPostsFromCurrentUser = () => {
-    return getToken().then((token) => {
-
-        return fetch(`${baseUrl}/myPosts`, {
-            method: "GET",
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        }).then(resp => {
-            if (resp.ok) {
-                return resp.json();
-            } else {
-                throw new Error("An unknown error occurred while trying to get your posts.");
             }
         });
     });

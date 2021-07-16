@@ -13,22 +13,32 @@ const _doesUserExist = (firebaseUserId) => {
     }).then(resp => resp.ok));
 };
 
+
 const _saveUser = (userProfile) => {
   return getToken().then((token) =>
-    fetch(_apiUrl, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json"
+  fetch(_apiUrl, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json"
       },
       body: JSON.stringify(userProfile)
     }).then(resp => resp.json()));
-};
+  };
 
+  
 
-
-export const getToken = () => firebase.auth().currentUser.getIdToken();
-
+  export const getToken = () => firebase.auth().currentUser.getIdToken();
+  
+  export const getCurrentUser = (firebaseUserId) => {
+   return getToken().then((token) =>
+     fetch(`${_apiUrl}/${firebaseUserId}`, {
+       method: "GET",
+       headers: {
+         Authorization: `Bearer ${token}`
+       }
+     }).then(resp => resp.ok));
+  };
 
 export const login = (email, pw) => {
   return firebase.auth().signInWithEmailAndPassword(email, pw)
@@ -55,9 +65,9 @@ export const logout = () => {
 
 export const register = (userProfile, password) => {
   return firebase.auth().createUserWithEmailAndPassword(userProfile.email, password)
-    .then((createResponse) => _saveUser({ 
-      ...userProfile, 
-      firebaseUserId: createResponse.user.uid 
+    .then((createResponse) => _saveUser({
+      ...userProfile,
+      firebaseUserId: createResponse.user.uid
     }));
 };
 
@@ -67,3 +77,4 @@ export const onLoginStatusChange = (onLoginStatusChangeHandler) => {
     onLoginStatusChangeHandler(!!user);
   });
 };
+
