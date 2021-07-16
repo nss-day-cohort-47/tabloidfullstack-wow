@@ -1,16 +1,21 @@
 import React from "react";
-import { Card, CardBody } from "reactstrap";
+import { Card, CardBody, Button } from "reactstrap";
+import { Link, } from "react-router-dom";
 
 
-const Tag = ({ tag }) => {
-    //TODO: Add a link on the Name of the Tag that will route to a Tag Edit Form
+
+const Tag = ({ tag, deleteCurrentTag }) => {
 
     return (
         <Card >
             <CardBody>
                 <h4>{tag.name}</h4>
-            </CardBody>
-        </Card>
+                <Link to={`/tag/${tag.id}`}>
+                    <Button>Edit</Button>
+                </Link>
+                <Button onClick={() => deleteCurrentTag(tag.id)}>Delete</Button>
+            </CardBody >
+        </Card >
     );
 };
 

@@ -6,21 +6,27 @@ import Hello from "./Hello";
 import PostList from "./Post/PostList";
 import PostDetails from "./Post/PostDetails";
 import AllPostsFromCurrentUser from "./Post/UserPosts";
+import CommentList from "./Comment/CommentList";
 import CategoryList from "./Categories/CategoryList";
 import CategoryForm from "./Categories/CategoryForm";
 import CategoryEdit from "./Categories/CategoryEdit";
 import TagList from "./Tag/TagList";
+import UserProfileList from "./Users/UserProfileList"
 import TagAddForm from "./Tag/TagAddForm";
 import PostForm from './Post/PostForm';
+import TagEditForm from "./Tag/TagEditForm";
+import UserProfileDetails from "./Users/UserProfileDetails";
 
 export default function ApplicationViews({ isLoggedIn }) {
 
   return (
     <main>
       <Switch>
+
         <Route path="/" exact>
           {isLoggedIn ? <Hello /> : <Redirect to="/login" />}
         </Route>
+
         <Route path="/post" exact>
           {isLoggedIn ? <PostList /> : <Redirect to="/login" />}
         </Route>
@@ -36,6 +42,10 @@ export default function ApplicationViews({ isLoggedIn }) {
         <Route path="/post/add" exact>
           {isLoggedIn ? <PostForm /> : <Redirect to="/login" />}
         </Route>
+        
+        <Route path="/comment/PostId/:id" exact>
+          {isLoggedIn ? <CommentList /> : <Redirect to="/login" />}
+        </Route>
 
         <Route path="/category" exact>
           {isLoggedIn ? <CategoryList /> : <Redirect to="/login" />}
@@ -49,12 +59,24 @@ export default function ApplicationViews({ isLoggedIn }) {
           {isLoggedIn ? <TagAddForm /> : <Redirect to="/login" />}
         </Route>
 
+        <Route path="/tag/:id" exact>
+          {isLoggedIn ? <TagEditForm /> : <Redirect to="/login" />}
+        </Route>
+
         <Route path="/category/add" exact>
           {isLoggedIn ? <CategoryForm /> : <Redirect to="/login" />}
         </Route>
         
         <Route path="/category/:id" exact>
           {isLoggedIn ? <CategoryEdit /> : <Redirect to="/login" />}
+        </Route>
+
+        <Route path="/userProfile" exact>
+          {isLoggedIn ? <UserProfileList /> : <Redirect to="/login" />}
+        </Route>
+
+        <Route path="/userProfile/details/:id" exact>
+          {isLoggedIn ? <UserProfileDetails /> : <Redirect to="/login" />}
         </Route>
 
         <Route path="/login">
