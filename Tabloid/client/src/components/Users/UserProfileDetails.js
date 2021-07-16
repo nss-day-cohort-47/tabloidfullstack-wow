@@ -29,6 +29,7 @@ const UserProfileDetails = () => {
 
         <Card >
             <CardBody>
+                {/* {userDetails.imageLocation? } */}
                 <img src={image} />
                 <p>{userDetails.fullName}</p>
 
