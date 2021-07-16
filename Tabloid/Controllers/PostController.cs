@@ -83,10 +83,18 @@ namespace Tabloid.Controllers
             return CreatedAtAction(nameof(GetAll), new { id = post.Id }, post);
         }
         //// PUT api/<PostController>/5
-        //[HttpPut("{id}")]
-        //public void Put(int id, [FromBody] string value)
-        //{
-        //}
+        [HttpPut("{id}")]
+        public IActionResult Put(int id, Post post)
+        {
+
+            post.PublishDateTime = DateTime.Now;
+            if (id != post.Id)
+            {
+                return BadRequest();
+            }
+            _postRepository.UpdatePost(post);
+            return NoContent();
+        }
 
         //DELETE api/<PostController>/5
         [HttpDelete("{id}")]
