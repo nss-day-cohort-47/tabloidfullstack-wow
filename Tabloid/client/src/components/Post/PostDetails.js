@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, CardBody, Button } from "reactstrap";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router";
+import { useParams, useHistory } from "react-router";
 import { getPublishedPostById } from "../../modules/postManager";
 import { Link } from "react-router-dom";
 
@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 const PostDetails = () => {
     const [postDetails, setPostDetails] = useState({});
     const { id } = useParams();
+    
 
     const getPostDetails = () => {
         getPublishedPostById(id)
@@ -38,6 +39,11 @@ const PostDetails = () => {
                 </Link>
                 <Link to={`/comment/add/${postDetails.id}`}>
                     <Button className="btn btn-success">Add Comment</Button>
+                </Link>
+                <Link>
+          
+                   
+                
                 </Link>
             </CardBody>
         </Card>
