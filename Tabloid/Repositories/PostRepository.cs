@@ -102,11 +102,11 @@ namespace Tabloid.Repositories
                     cmd.CommandText = @"
                         INSERT INTO Post (
                             Title, Content, ImageLocation, CreateDateTime, PublishDateTime,
-                            IsApproved, CategoryId, UserProfileId )
+                            IsApproved, CategoryId, UserProfileId, IsDeleted )
                         OUTPUT INSERTED.ID
                         VALUES (
                             @Title, @Content, @ImageLocation, @CreateDateTime, @PublishDateTime,
-                            1, @CategoryId, @UserProfileId )";
+                            1, @CategoryId, @UserProfileId, 0 )";
                     DbUtils.AddParameter(cmd, "@Title", post.Title);
                     DbUtils.AddParameter(cmd, "@Content", post.Content);
                     DbUtils.AddParameter(cmd, "@ImageLocation", post.ImageLocation);

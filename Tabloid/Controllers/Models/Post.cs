@@ -16,9 +16,15 @@ namespace Tabloid.Models
         public string Content { get; set; }
         [DisplayName("Header Image URL")]
         public string ImageLocation { get; set; }
+
+        [DisplayName("Creation Date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:MM-dd-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime CreateDateTime { get; set; }
+
         [DisplayName("Published")]
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:MM-dd-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? PublishDateTime { get; set; }
         public bool IsApproved { get; set; }
         [Required]

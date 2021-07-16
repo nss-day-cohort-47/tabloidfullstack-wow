@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ using Tabloid.Repositories;
 
 namespace Tabloid.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class PostController : ControllerBase
@@ -57,12 +59,29 @@ namespace Tabloid.Controllers
             return Ok(posts);
         }
 
-        //// POST api/<PostController>
-        //[HttpPost]
-        //public void Post([FromBody] string value)
+        //public IActionResult CreatePost(Post post)
         //{
+        //    _postRepository.Add(post);
+        //    return CreatedAtAction("Get", new { id = post.Id }, post);
         //}
 
+        // POST api/<PostController>
+        [HttpPost]
+        public IActionResult CreatePost(Post post)
+        {
+            var currentUserProfile = GetCurrentUserProfile();
+            post.UserProfileId = currentUserProfile.Id;
+            post.CreateDateTime = DateTime.Now;
+            post.PublishDateTime = DateTime.Now;
+           
+            //if (string.IsNullOrWhiteSpace(post.PublishDateTime))
+            //{
+            //    post.PublishDateTime = null;
+            //}
+            
+            _postRepository.Add(post);
+            return CreatedAtAction(nameof(GetAll), new { id = post.Id }, post);
+        }
         //// PUT api/<PostController>/5
         //[HttpPut("{id}")]
         //public void Put(int id, [FromBody] string value)

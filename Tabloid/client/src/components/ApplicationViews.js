@@ -13,6 +13,7 @@ import CategoryEdit from "./Categories/CategoryEdit";
 import TagList from "./Tag/TagList";
 import UserProfileList from "./Users/UserProfileList"
 import TagAddForm from "./Tag/TagAddForm";
+import PostForm from './Post/PostForm';
 import CommentForm from "./Comment/CommentAddForm";
 import TagEditForm from "./Tag/TagEditForm";
 import UserProfileDetails from "./Users/UserProfileDetails";
@@ -39,6 +40,10 @@ export default function ApplicationViews({ isLoggedIn }) {
           {isLoggedIn ? <AllPostsFromCurrentUser /> : <Redirect to="/login" />}
         </Route>
 
+        <Route path="/post/add" exact>
+          {isLoggedIn ? <PostForm /> : <Redirect to="/login" />}
+        </Route>
+        
         <Route path="/comment/PostId/:id" exact>
           {isLoggedIn ? <CommentList /> : <Redirect to="/login" />}
         </Route>
