@@ -69,7 +69,7 @@ export const saveTagsToPost = (id, selectedTagIds) => {
             body: JSON.stringify({ id, selectedTagIds })
         }).then(resp => {
             if (!resp.ok) {
-                window.alert('You are unable to edit this post.');
+                window.alert('You are unable to add tags to this post.');
             }
         })
 

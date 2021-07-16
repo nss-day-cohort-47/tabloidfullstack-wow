@@ -90,24 +90,23 @@ namespace Tabloid.Repositories
             }
         }
 
-        //public void RemoveTagFromPost(int tag, int post)
-        //{
-        //    using (SqlConnection conn = Connection)
-        //    {
-        //        conn.Open();
-        //        using (SqlCommand cmd = conn.CreateCommand())
-        //        {
-        //            cmd.CommandText = @"
-        //            DELETE FROM PostTag WHERE PostId = @postid  AND TagId = @tagid  ;
-        //        ";
+        public void RemoveAllTagsFromPost(int postId)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                    DELETE FROM PostTag WHERE PostId = @postid;
+                ";
 
-        //            cmd.Parameters.AddWithValue("@postid", post);
-        //            cmd.Parameters.AddWithValue("@tagid", tag);
+                   DbUtils.AddParameter(cmd, "@postid", postId);
 
-        //            cmd.ExecuteNonQuery();
-        //        }
-        //    }
-        //}
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
         public void AddTag(Tag tag)
         {
             using (SqlConnection conn = Connection)

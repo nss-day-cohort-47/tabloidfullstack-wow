@@ -61,6 +61,7 @@ namespace Tabloid.Controllers
             //Create a postTag for each tag id using the postId.
        
                 int postId = postTagRequest.id;
+            _tagRepository.RemoveAllTagsFromPost(postId);
             //Iterate through each tag id in the array and create a posttag.
             foreach (var tagId in postTagRequest.selectedTagIds)
             {
