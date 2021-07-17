@@ -37,9 +37,9 @@ export const getTagById = (id) => {
     });
 };
 
-export const getAllTagsByPostId = (postId) => {
+export const getAllTagsByPostId = (id) => {
     return getToken().then((token) => {
-        return fetch(`${baseUrl}/getAllTagsByPostId`, {
+        return fetch(`${baseUrl}/getAllTagsByPostId/${id}`, {
             method: "GET",
             headers: {
                 Authorization: `Bearer ${token}`

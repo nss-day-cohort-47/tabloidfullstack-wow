@@ -46,10 +46,10 @@ namespace Tabloid.Controllers
             return Ok(tag);
         }
 
-        [HttpGet("getAllTagsByPostId")]
-        public IActionResult GetTagByPostId(int postId)
+        [HttpGet("getAllTagsByPostId/{id}")]
+        public IActionResult GetTagByPostId(int id)
         {
-            return Ok(_tagRepository.GetTagsByPostId(postId));
+            return Ok(_tagRepository.GetTagsByPostId(id));
         }
 
         // POST api/<TagController>

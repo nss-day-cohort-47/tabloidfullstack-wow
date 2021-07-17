@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, CardBody } from "reactstrap";
+import { Card, CardBody, ListGroupItem, ListGroup } from "reactstrap";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import { getPublishedPostById } from "../../modules/postManager";
@@ -48,11 +48,16 @@ const PostDetails = () => {
                 </Link>
                 <div>
                     <strong>Tags</strong>
-
                 </div>
-
+                <ListGroup horizontal>
+                    {tagsList.map(tag => {
+                        return (
+                            <ListGroupItem className="justify-content-between">{tag.name}</ListGroupItem>
+                        )
+                    })}
+                </ListGroup>
             </CardBody>
-        </Card>
+        </Card >
     );
 };
 
