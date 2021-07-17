@@ -33,7 +33,7 @@ namespace Tabloid.Repositories
                               LEFT JOIN Category c ON p.CategoryId = c.id
                               LEFT JOIN UserProfile u ON p.UserProfileId = u.id
                               LEFT JOIN UserType ut ON u.UserTypeId = ut.id
-                        WHERE IsApproved = 1 AND PublishDateTime < SYSDATETIME()
+                        WHERE IsApproved = 1 AND PublishDateTime < SYSDATETIME() AND p.IsDeleted = 0
                          ORDER BY p.CreateDateTime DESC";
                     var reader = cmd.ExecuteReader();
 
@@ -62,7 +62,7 @@ namespace Tabloid.Repositories
                        SELECT p.Id, p.Title, p.Content, 
                               p.ImageLocation AS HeaderImage,
                               p.CreateDateTime, p.PublishDateTime, p.IsApproved,
-                              p.CategoryId, p.UserProfileId,
+                              p.CategoryId, p.UserProfileId, p.IsDeleted,
                               c.[Name] AS CategoryName,
                               u.FirstName, u.LastName, u.DisplayName, 
                               u.Email, u.CreateDateTime, u.ImageLocation AS AvatarImage,
@@ -73,7 +73,7 @@ namespace Tabloid.Repositories
                               LEFT JOIN Category c ON p.CategoryId = c.id
                               LEFT JOIN UserProfile u ON p.UserProfileId = u.id
                               LEFT JOIN UserType ut ON u.UserTypeId = ut.id
-                        WHERE FirebaseUserId = @FirebaseUserId
+                        WHERE FirebaseUserId = @FirebaseUserId AND p.IsDeleted = 0
                     ORDER BY p.CreateDateTime DESC";
                     DbUtils.AddParameter(cmd, "@firebaseUserId", firebaseUserId);
                     var reader = cmd.ExecuteReader();
@@ -102,11 +102,11 @@ namespace Tabloid.Repositories
                     cmd.CommandText = @"
                         INSERT INTO Post (
                             Title, Content, ImageLocation, CreateDateTime, PublishDateTime,
-                            IsApproved, CategoryId, UserProfileId )
+                            IsApproved, CategoryId, UserProfileId, IsDeleted )
                         OUTPUT INSERTED.ID
                         VALUES (
                             @Title, @Content, @ImageLocation, @CreateDateTime, @PublishDateTime,
-                            1, @CategoryId, @UserProfileId )";
+                            1, @CategoryId, @UserProfileId, 0 )";
                     DbUtils.AddParameter(cmd, "@Title", post.Title);
                     DbUtils.AddParameter(cmd, "@Content", post.Content);
                     DbUtils.AddParameter(cmd, "@ImageLocation", post.ImageLocation);
@@ -117,6 +117,29 @@ namespace Tabloid.Repositories
 
 
                     post.Id = (int)cmd.ExecuteScalar();
+                }
+            }
+        }
+
+
+        public void Delete(int id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                            UPDATE Post
+                            SET IsDeleted = 1
+                            WHERE Id = @id
+                        ";
+
+                    DbUtils.AddParameter(cmd, "@id", id);
+                    
+
+                    cmd.ExecuteNonQuery();
                 }
             }
         }
@@ -356,25 +379,6 @@ namespace Tabloid.Repositories
 
 
 
-        //    public void DeletePost(int id)
-        //    {
-        //        using (var conn = Connection)
-        //        {
-        //            conn.Open();
-
-        //            using (var cmd = conn.CreateCommand())
-        //            {
-        //                cmd.CommandText = @"
-        //                    DELETE FROM Post
-        //                    WHERE Id = @id
-        //                ";
-
-        //                cmd.Parameters.AddWithValue("@id", id);
-
-        //                cmd.ExecuteNonQuery();
-        //            }
-        //        }
-        //    }
 
         //    public void UpdatePost(Post post)
         //    {

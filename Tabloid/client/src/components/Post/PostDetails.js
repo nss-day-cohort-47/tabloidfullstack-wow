@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, CardBody, ListGroupItem, ListGroup } from "reactstrap";
+import { Card, CardBody, ListGroupItem, ListGroup, Button } from "reactstrap";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import { getPublishedPostById } from "../../modules/postManager";
@@ -12,11 +12,6 @@ const PostDetails = () => {
     const [tagsList, setTagsList] = useState([]);
     const { id } = useParams();
 
-    //get the tag ids associated with the post
-
-    //display tag name in the JSX
-
-    //Setting state for array of tags
     const getTags = () => {
         getAllTagsByPostId(id)
             .then(res => setTagsList(res))
@@ -26,6 +21,12 @@ const PostDetails = () => {
         getPublishedPostById(id)
             .then(setPostDetails)
     }
+
+    const handleDate = () => {
+
+        let date = new Date(postDetails.publishDateTime).toDateString();
+        return date;
+    };
 
     useEffect(() => {
         getTags();
@@ -38,10 +39,18 @@ const PostDetails = () => {
                 <p><b>Title: </b>{postDetails.title}</p>
                 <p><b>Image: </b>{postDetails.headerImage}</p>
                 <p><b>Content: </b>{postDetails.content}</p>
-                <p><b>Date: </b>{postDetails.publishDateTime}</p>
+                <p><b>Date: </b>{handleDate()}</p>
                 <p><b>Author: </b>{postDetails.userProfile?.fullName}</p>
                 <Link to={`/comment/PostId/${postDetails.id}`}>
-                    <button>View Comments</button>
+                    <Button className="btn btn-primary">View Comments</Button>
+                </Link>
+                <Link to={`/comment/add/${postDetails.id}`}>
+                    <Button className="btn btn-success">Add Comment</Button>
+                </Link>
+                <Link>
+
+
+
                 </Link>
                 <Link to={`/tag/addtag/${postDetails.id}`}>
                     <button>Manage Tags</button>

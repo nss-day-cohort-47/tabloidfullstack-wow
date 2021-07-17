@@ -19,9 +19,9 @@ const UserProfileList = () => {
         <div>
             <div className="container">
 
-                {users.map((user) => (
-                    <UserProfile user={user} key={user.id} />
-                ))}
+                {users.map((user) => {
+                    return <UserProfile user={user} key={user.id} />
+                })}
 
             </div>
         </div>

@@ -13,8 +13,11 @@ import CategoryEdit from "./Categories/CategoryEdit";
 import TagList from "./Tag/TagList";
 import UserProfileList from "./Users/UserProfileList"
 import TagAddForm from "./Tag/TagAddForm";
+import PostForm from './Post/PostForm';
+import CommentForm from "./Comment/CommentAddForm";
 import TagEditForm from "./Tag/TagEditForm";
 import AddTagToPost from "./Tag/AddTagToPost";
+import UserProfileDetails from "./Users/UserProfileDetails";
 
 export default function ApplicationViews({ isLoggedIn }) {
 
@@ -36,6 +39,10 @@ export default function ApplicationViews({ isLoggedIn }) {
 
         <Route path="/myPosts" exact>
           {isLoggedIn ? <AllPostsFromCurrentUser /> : <Redirect to="/login" />}
+        </Route>
+
+        <Route path="/post/add" exact>
+          {isLoggedIn ? <PostForm /> : <Redirect to="/login" />}
         </Route>
 
         <Route path="/comment/PostId/:id" exact>
@@ -70,8 +77,16 @@ export default function ApplicationViews({ isLoggedIn }) {
           {isLoggedIn ? <CategoryEdit /> : <Redirect to="/login" />}
         </Route>
 
+        <Route path="/comment/add/:id" exact>
+          {isLoggedIn ? <CommentForm /> : <Redirect to="/login" />}
+        </Route>
+
         <Route path="/userProfile" exact>
           {isLoggedIn ? <UserProfileList /> : <Redirect to="/login" />}
+        </Route>
+
+        <Route path="/userProfile/details/:id" exact>
+          {isLoggedIn ? <UserProfileDetails /> : <Redirect to="/login" />}
         </Route>
 
         <Route path="/login">
