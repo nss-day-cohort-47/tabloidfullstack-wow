@@ -53,7 +53,7 @@ const CommentEditForm = () => {
             </FormGroup>
 
             <Button className="btn btn-success" onClick={handleSubmit}>Submit</Button>
-            <Button className="btn btn-danger" onClick={() => history.push(`/post/details/${id}`)}>Cancel</Button>
+            <Button className="btn btn-danger" onClick={() => history.push(`/comment/PostId/${editComment.postId}`)}>Cancel</Button>
         </Form>
     );
 };
