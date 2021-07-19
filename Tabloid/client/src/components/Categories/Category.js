@@ -7,7 +7,7 @@ const Category = ({ category, deleteCat }) => {
 
 
     return (
-        <Card >
+        <Card className="container w-50 m-2 p-2">
             <CardBody className="card-content-category">
                 <p>{category.name}</p>
                 <div className="category-buttons">

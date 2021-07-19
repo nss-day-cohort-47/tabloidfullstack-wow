@@ -22,15 +22,16 @@ const AllPostsFromCurrentUser= () => {
     }, []);
 
     return (
-        <Card >
-            <CardBody>
-            <div className="row justify-content-center">
+     <>
+         
+            <h2 className="text-center">My Posts</h2> 
+            <div className="col m-2 p-2 justify-content-center">
                 {posts.map((post) => (
                     <Post post={post} key={post.id} showEditAndDelete={true}/>
                 ))}
             </div>
-            </CardBody>
-        </Card>
+           
+        </>
     );
 };
 

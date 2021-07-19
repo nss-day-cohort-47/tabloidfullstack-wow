@@ -40,41 +40,43 @@ const Post = ({ post, showEditAndDelete }) => {
     // })
     
     }
-    if (showEditAndDelete === true)
-    {
+    // if (showEditAndDelete === true)
+    // {
         return (
-            <Card >
-                <CardBody>
+            <Card className="m-2 p-2 w-50 mx-auto">
+                <CardBody className="m-3">
                     <Link to={`/post/details/${postId}`}>
                     <p><b>Title: </b>{post.title}</p>
                     </Link>
                     <p><b>Author: </b>{post.userProfile.fullName}</p>
                     <p><b>Category: </b>{post.category.name}</p>
+                    {showEditAndDelete && 
                     <div>              
                     <button className="btn btn-danger" onClick={() => handleDeletePost(post.id)}>Delete</button>
-                    </div> 
                     <Link to={`/post/edit/${postId}`}>
-                    <button className="btn btn-light">Edit</button>
+                    <button className="btn btn-light  m-2">Edit</button>
                     </Link>
+                    </div> 
+                    }
                 </CardBody>
             </Card>
         );
-    }
-    else
-    {
-        return (
-            <Card >
-                <CardBody>
-                    <Link to={`/post/details/${postId}`}>
-                    <p><b>Title: </b>{post.title}</p>
-                    </Link>
-                    <p><b>Author: </b>{post.userProfile.fullName}</p>
-                    <p><b>Category: </b>{post.category.name}</p>
-                </CardBody>
-            </Card>
-        );
+    // }
+    // else
+    // {
+    //     return (
+    //         <Card className="m-2 p-2">
+    //             <CardBody>
+    //                 <Link to={`/post/details/${postId}`}>
+    //                 <p><b>Title: </b>{post.title}</p>
+    //                 </Link>
+    //                 <p><b>Author: </b>{post.userProfile.fullName}</p>
+    //                 <p><b>Category: </b>{post.category.name}</p>
+    //             </CardBody>
+    //         </Card>
+    //     );
 
-    }
+    //}
 };
 
 export default Post;
