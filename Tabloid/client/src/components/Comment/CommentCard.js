@@ -4,6 +4,8 @@ import { useHistory } from 'react-router';
 import { Card, CardTitle, CardBody } from 'reactstrap';
 import CardText from 'reactstrap/lib/CardText';
 import { deleteComment } from '../../modules/commentManager';
+import { Link } from "react-router-dom";
+
 
 const CommentCard = ({ comment, getComments }) => {
 
@@ -34,6 +36,10 @@ const CommentCard = ({ comment, getComments }) => {
                     <p>Comment: {comment.content}</p>
                 </CardText>
                 <Button className="btn btn-danger" onClick={handleDelete}>Delete</Button>
+                <Link to={`/comment/edit/${comment.id}`}>
+                    <Button className="btn btn-info">Edit Comment</Button>
+                </Link>
+
             </CardBody>
         </Card>
     );
