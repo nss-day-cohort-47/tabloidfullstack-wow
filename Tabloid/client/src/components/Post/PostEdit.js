@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
-import { getById, updateCategory } from "../../modules/categoryManager";
+import { getById,  } from "../../modules/categoryManager";
 
-const CategoryEdit = () => {
-    const [editCategory, setEditCategory] = useState([]);
+const PostEdit = () => {
+    const [postEdit, setPostCategory] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const { id } = useParams();
     const history = useHistory();
@@ -13,35 +13,35 @@ const CategoryEdit = () => {
         const value = evt.target.value;
         const key = evt.target.id;
 
-        const categoryCopy = { ...editCategory };
+        const postCopy = { ...editPost };
 
-        categoryCopy[key] = value;
-        setEditCategory(categoryCopy);
+        postCopy[key] = value;
+        setEditPost(postCopy);
     };
 
     const handleUpdate = (evt) => {
         evt.preventDefault();
         setIsLoading(true);
-        const editedCategory = {
-            id: editCategory.id,
-            name: editCategory.name
+        const editedPost = {
+            id: editPost.id,
+            name: editPost.name
         };
-        updateCategory(editedCategory).then((c) => {
-            history.push("/category");
+        updatePost(editedPost).then((c) => {
+            history.push("/post");
         });
 
     };
     useEffect(() => {
         getById(id)
             .then(c => {
-                setEditCategory(c);
+                setEditPost(p);
                 setIsLoading(false)
             });
     }, [id])
 
     return (
         <Form>
-            <h2>Edit Category</h2>
+            <h2>Edit Post</h2>
             <FormGroup>
                 <Label for="name">Name</Label>
                 <Input type="text" name="name" id="name" placeholder="category name"
@@ -56,4 +56,4 @@ const CategoryEdit = () => {
         
 };
 
-export default CategoryEdit;
+export default PostEdit;
