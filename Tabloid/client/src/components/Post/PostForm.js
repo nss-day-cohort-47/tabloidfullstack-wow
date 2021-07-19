@@ -63,7 +63,8 @@ const PostForm = () => {
 
 
     return (
-        <Form>
+        
+        <Form className="container w-75">
             <h2>New Post</h2>
             <FormGroup>
                 <Label for="title">Title</Label>
@@ -72,13 +73,7 @@ const PostForm = () => {
                     onChange={handleInputChange} />
             </FormGroup>
             <FormGroup>
-                <Label for="title">Content</Label>
-                <Input type="text" name="content" id="content" placeholder="content"
-                    value={newPost.content} rows="4" cols="40"
-                    onChange={handleInputChange} />
-            </FormGroup>
-            <FormGroup>
-                <Label for="title">Header Image URL</Label>
+                <Label for="headerImage">Header Image</Label>
                 <Input type="text" name="imageLocation" id="imageLocation" placeholder="imageLocation"
                     value={newPost.imageLocation}
                     onChange={handleInputChange} />
@@ -91,7 +86,16 @@ const PostForm = () => {
                         <option key={c.id} value={c.id}>{c.name}</option>
                     ))}
                 </select>
-            </FormGroup>         
+            </FormGroup> 
+
+            <FormGroup>
+            <Label for="content">Content </Label> 
+            
+                <textarea  type="text" name="content" id="content" placeholder="content"
+                    value={newPost.content} 
+                    onChange={handleInputChange} rows="10" cols="145" />
+                    
+            </FormGroup>
 
             <Button className="btn btn-primary" onClick={handleSave}>Submit</Button>
             <Button className="btn btn-primary" onClick={() => history.push(`/`)}>Cancel</Button>

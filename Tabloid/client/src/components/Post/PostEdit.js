@@ -56,8 +56,8 @@ const PostEdit = () => {
     }, [id])
 
     return (
-        <Form>
-            <h2>Edit Post</h2>
+        <Form className="container w-75">
+            <h2 className="text-center">Edit Post</h2>
             <FormGroup>
                 <Label for="title">Title</Label>
                 <Input type="text" name="title" id="title" placeholder="post title"
@@ -65,9 +65,9 @@ const PostEdit = () => {
                     onChange={handleInputChange} />
             </FormGroup>
             <FormGroup>
-                <Label for="content">Content</Label>
-                <Input type="text" name="content" id="content" placeholder="post content"
-                    value={editPost.content}
+                <Label for="headerImage">Image</Label>
+                <Input type="text" name="headerImage" id="headerImage" placeholder="post headerImage"
+                    value={editPost.headerImage}
                     onChange={handleInputChange} />
             </FormGroup>
             <FormGroup>
@@ -80,15 +80,16 @@ const PostEdit = () => {
                 </select>
             </FormGroup>         
             <FormGroup>
-                <Label for="headerImage">Image</Label>
-                <Input type="text" name="headerImage" id="headerImage" placeholder="post headerImage"
-                    value={editPost.headerImage}
-                    onChange={handleInputChange} />
-            </FormGroup>
-            <FormGroup>
                 <Label for="publishDateTime">Publication Date</Label>
                 <Input type="date" name="publishDateTime" id="publishDateTime" placeholder="post publish Date Time"
                     value={editPost.publishDateTime}
+                    onChange={handleInputChange} />
+            </FormGroup>
+            <FormGroup>
+                <Label for="content">Content</Label>
+                <textarea  type="text" name="content" id="content" placeholder="content"
+                    value={editPost.content} 
+                    rows="10" cols="145" 
                     onChange={handleInputChange} />
             </FormGroup>
 

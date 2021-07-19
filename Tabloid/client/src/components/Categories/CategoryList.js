@@ -23,9 +23,9 @@ const CategoryList = () => {
     }, []);
 
     return (
-        <div>
+       
 
-            <div className="container">
+            <div className="container m-2 p-2">
                 <Link to={`/category/add`}>
                     <button className="btn btn-secondary" >Add New Category</button>
                 </Link>
@@ -36,7 +36,7 @@ const CategoryList = () => {
 
             </div>
 
-        </div>
+      
     );
 };
 

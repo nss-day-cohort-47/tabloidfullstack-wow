@@ -34,8 +34,11 @@ const PostDetails = () => {
     }, []);
 
     return (
-        <Card >
+        <>
+        <h2 className="text-center">Details </h2>
+        <Card className="w-75 mx-auto">
             <CardBody>
+                
                 <p><b>Title: </b>{postDetails.title}</p>
                 <p><b>Image: </b>{postDetails.headerImage}</p>
                 <p><b>Content: </b>{postDetails.content}</p>
@@ -62,6 +65,7 @@ const PostDetails = () => {
                 </ListGroup>
             </CardBody>
         </Card >
+        </>
     );
 };
 

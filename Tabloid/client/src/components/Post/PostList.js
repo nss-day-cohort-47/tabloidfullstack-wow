@@ -17,10 +17,10 @@ const PostList = () => {
     }, []);
 
     return (
-        <div>
+        <div className="m-3">
 
             <div className="container">
-                <div className="row justify-content-center">
+                <div className="row m-3 justify-content-center">
 
                     {posts.map((post) => (
                         <Post post={post} key={post.id} showEditAndDelete={false}/>
