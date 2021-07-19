@@ -90,3 +90,22 @@ export const deletePost = (id) => {
 
     })
 };
+
+export const updatePost = (editedPost) => {
+    return getToken().then((token) => {
+
+        return fetch(`${baseUrl}/${editedPost.id}`, {
+            method: "PUT",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(editedPost)
+        }).then((res) => {
+            if (!res.ok) {
+                window.alert('You are unable to edit this post.');
+            }
+        })
+
+    });
+};

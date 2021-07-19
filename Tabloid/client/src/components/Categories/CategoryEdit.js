@@ -53,7 +53,7 @@ const CategoryEdit = () => {
             <Button className="btn btn-primary" onClick={() => history.push(`/category`)}>Cancel</Button>
         </Form>
     );
-
+        
 };
 
 export default CategoryEdit;

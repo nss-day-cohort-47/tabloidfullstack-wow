@@ -47,11 +47,6 @@ const PostDetails = () => {
                 <Link to={`/comment/add/${postDetails.id}`}>
                     <Button className="btn btn-success">Add Comment</Button>
                 </Link>
-                <Link>
-
-
-
-                </Link>
                 <Link to={`/tag/addtag/${postDetails.id}`}>
                     <button>Manage Tags</button>
                 </Link>

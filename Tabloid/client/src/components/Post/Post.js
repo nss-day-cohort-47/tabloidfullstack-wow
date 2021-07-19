@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Card, CardBody } from "reactstrap";
 import { Link } from 'react-router-dom';
-import { deletePost } from '../../modules/postManager'
+import { deletePost, updatePost } from '../../modules/postManager'
 import { useHistory } from "react-router";
     
 const Post = ({ post, showEditAndDelete }) => {
     const postId = post.id
     const history = useHistory();
+    // const [isLoading, setIsLoading] = useState(false);
+    // const [editPost, setEditPost] = useState([]);
 
     const handleDeletePost = (id) => {
         if (window.confirm("are you sure you want to delete this post?"))
@@ -16,6 +18,26 @@ const Post = ({ post, showEditAndDelete }) => {
                 history.push(`/post`);
             })
         }
+
+    // const handleEdit = (evt) => {
+    //     evt.preventDefault();
+    //     setIsLoading(true);
+
+
+    //      const editedPost = {
+    //         title: editPost.title,
+    //         content: editPost.content,
+    //         headerImage: editPost.headerImage,
+    //         publishDateTime: editPost.publishDateTime
+    //     };
+    //     updatePost(editedPost).then((p) => {
+    //         history.push("/post");
+    //     });
+    // }
+
+    // useEffect(() => {
+        
+    // })
     
     }
     if (showEditAndDelete === true)
@@ -30,7 +52,10 @@ const Post = ({ post, showEditAndDelete }) => {
                     <p><b>Category: </b>{post.category.name}</p>
                     <div>              
                     <button className="btn btn-danger" onClick={() => handleDeletePost(post.id)}>Delete</button>
-                    </div>      
+                    </div> 
+                    <Link to={`/post/edit/${postId}`}>
+                    <button className="btn btn-light">Edit</button>
+                    </Link>
                 </CardBody>
             </Card>
         );
