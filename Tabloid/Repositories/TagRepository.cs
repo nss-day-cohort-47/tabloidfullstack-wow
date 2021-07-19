@@ -70,44 +70,79 @@ namespace Tabloid.Repositories
             }
         }
 
-        //public void AddTagToPost(int tag, int post)
-        //{
-        //    using (SqlConnection conn = Connection)
-        //    {
-        //        conn.Open();
-        //        using (SqlCommand cmd = conn.CreateCommand())
-        //        {
-        //            cmd.CommandText = @"
-        //            INSERT INTO PostTag (PostId, TagId)
-        //            OUTPUT INSERTED.ID
-        //            VALUES (@postid, @tagid);
-        //        ";
+        public List<Tag> GetTagsByPostId(int postId)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                          SELECT Distinct t.name, t.id
+                            from Tag t 
+                            LEFT JOIN PostTag pt ON t.id = pt.TagId
+                            LEFT JOIN Post p ON pt.PostId = p.id
+                              where p.id = @id";
 
-        //            cmd.Parameters.AddWithValue("@postid", post);
-        //            cmd.Parameters.AddWithValue("@tagid", tag);
+                    DbUtils.AddParameter(cmd, "@id", postId);
 
-        //            int id = (int)cmd.ExecuteScalar();
-        //        }
-        //    }
-        //}
-        //public void RemoveTagFromPost(int tag, int post)
-        //{
-        //    using (SqlConnection conn = Connection)
-        //    {
-        //        conn.Open();
-        //        using (SqlCommand cmd = conn.CreateCommand())
-        //        {
-        //            cmd.CommandText = @"
-        //            DELETE FROM PostTag WHERE PostId = @postid  AND TagId = @tagid  ;
-        //        ";
+                    SqlDataReader reader = cmd.ExecuteReader();
 
-        //            cmd.Parameters.AddWithValue("@postid", post);
-        //            cmd.Parameters.AddWithValue("@tagid", tag);
+                    List<Tag> tags = new List<Tag>();
 
-        //            cmd.ExecuteNonQuery();
-        //        }
-        //    }
-        //}
+                    while (reader.Read())
+                    {
+                        tags.Add(new Tag()
+                        {
+                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            Name = reader.GetString(reader.GetOrdinal("Name"))
+                        }
+                        );
+
+                    }
+                    reader.Close();
+                    return tags;
+                }
+            }
+        }
+
+        public void AddTagToPost(int tagId, int postId)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                    INSERT INTO PostTag (PostId, TagId)
+                    OUTPUT INSERTED.ID
+                    VALUES (@postid, @tagid);
+                ";
+                    DbUtils.AddParameter(cmd, "@postid", postId);
+                    DbUtils.AddParameter(cmd, "@tagid", tagId);
+
+                    int id = (int)cmd.ExecuteScalar();
+                }
+            }
+        }
+
+        public void RemoveAllTagsFromPost(int postId)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                    DELETE FROM PostTag WHERE PostId = @postid;
+                ";
+
+                   DbUtils.AddParameter(cmd, "@postid", postId);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
         public void AddTag(Tag tag)
         {
             using (SqlConnection conn = Connection)
