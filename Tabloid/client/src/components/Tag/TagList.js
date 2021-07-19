@@ -9,8 +9,10 @@ const TagList = () => {
     const [tags, setTags] = useState([]);
 
     const deleteCurrentTag = (id) => {
-        deleteTag(id)
-            .then(() => getTags())
+        if (window.confirm("Do you really want to delete this tag?")) {
+            deleteTag(id)
+                .then(() => getTags());
+        }
     }
 
     const getTags = () => {
