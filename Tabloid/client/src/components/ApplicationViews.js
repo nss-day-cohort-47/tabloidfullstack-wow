@@ -16,6 +16,7 @@ import TagAddForm from "./Tag/TagAddForm";
 import PostForm from './Post/PostForm';
 import CommentForm from "./Comment/CommentAddForm";
 import TagEditForm from "./Tag/TagEditForm";
+import AddTagToPost from "./Tag/AddTagToPost";
 import UserProfileDetails from "./Users/UserProfileDetails";
 import UserDeactivateList from "./Users/UserDeactivateList";
 
@@ -44,7 +45,7 @@ export default function ApplicationViews({ isLoggedIn }) {
         <Route path="/post/add" exact>
           {isLoggedIn ? <PostForm /> : <Redirect to="/login" />}
         </Route>
-        
+
         <Route path="/comment/PostId/:id" exact>
           {isLoggedIn ? <CommentList /> : <Redirect to="/login" />}
         </Route>
@@ -59,6 +60,10 @@ export default function ApplicationViews({ isLoggedIn }) {
 
         <Route path="/tag/add" exact>
           {isLoggedIn ? <TagAddForm /> : <Redirect to="/login" />}
+        </Route>
+
+        <Route path="/tag/addtag/:id" exact>
+          {isLoggedIn ? <AddTagToPost /> : <Redirect to="/login" />}
         </Route>
 
         <Route path="/tag/:id" exact>
