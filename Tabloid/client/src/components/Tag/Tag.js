@@ -3,7 +3,8 @@ import { Card, CardBody, Button } from "reactstrap";
 import { Link, } from "react-router-dom";
 
 
-const Tag = ({ tag }) => {
+
+const Tag = ({ tag, deleteCurrentTag }) => {
 
     return (
         <Card >
@@ -12,6 +13,7 @@ const Tag = ({ tag }) => {
                 <Link to={`/tag/${tag.id}`}>
                     <Button>Edit</Button>
                 </Link>
+                <Button onClick={() => deleteCurrentTag(tag.id)}>Delete</Button>
             </CardBody >
         </Card >
     );

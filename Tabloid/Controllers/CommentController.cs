@@ -1,22 +1,28 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Tabloid.Models;
 using Tabloid.Repositories;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Tabloid.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CommentController : ControllerBase
     {
         private readonly ICommentRepository _commentRepository;
-        public CommentController(ICommentRepository commentRepository)
+        private readonly IUserProfileRepository _userProfileRepository;
+        public CommentController(ICommentRepository commentRepository, IUserProfileRepository userProfileRepository)
         {
             _commentRepository = commentRepository;
+            _userProfileRepository = userProfileRepository;
         }
 
         // GET: api/<CommentController>
@@ -40,8 +46,14 @@ namespace Tabloid.Controllers
 
         // POST api/<CommentController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult Post(Comment comment)
         {
+            var currentUser = GetCurrentUserProfile();
+            comment.UserProfileId = currentUser.Id;
+            comment.CreateDateTime = DateTime.Now;
+
+            _commentRepository.AddComment(comment);
+            return CreatedAtAction("Get", new { id = comment.Id }, comment);
         }
 
         // PUT api/<CommentController>/5
@@ -52,8 +64,16 @@ namespace Tabloid.Controllers
 
         // DELETE api/<CommentController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
+            _commentRepository.DeleteComment(id);
+            return NoContent();
+        }
+
+        private UserProfile GetCurrentUserProfile()
+        {
+            var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            return _userProfileRepository.GetByFirebaseUserId(firebaseUserId);
         }
     }
 }

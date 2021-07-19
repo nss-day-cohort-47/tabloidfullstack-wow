@@ -151,27 +151,27 @@ namespace Tabloid.Repositories
                 }
             }
         }
-        //public void DeleteTag(int tagId)
-        //{
-        //    using (SqlConnection conn = Connection)
-        //    {
-        //        conn.Open();
+        public void DeleteTag(int tagId)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
 
-        //        using (SqlCommand cmd = conn.CreateCommand())
-        //        {
-        //            cmd.CommandText = @"
-        //                    DELETE FROM PostTag
-        //                    Where TagId = @id;
-        //                    DELETE FROM Tag
-        //                    WHERE Id = @id;   
-        //                ";
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                            DELETE FROM PostTag
+                            Where TagId = @id;
+                            DELETE FROM Tag
+                            WHERE Id = @id;   
+                        ";
 
-        //            cmd.Parameters.AddWithValue("@id", tagId);
+                    DbUtils.AddParameter(cmd, "@id", tagId);
 
-        //            cmd.ExecuteNonQuery();
-        //        }
-        //    }
-        //}
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
 
         private Tag NewTagFromReader(SqlDataReader reader)
         {
