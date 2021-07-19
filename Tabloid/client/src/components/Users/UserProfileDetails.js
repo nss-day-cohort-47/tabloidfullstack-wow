@@ -16,7 +16,6 @@ const UserProfileDetails = () => {
     }
 
     const handleDate = () => {
-
         let date = new Date(userDetails.createDateTime).toDateString();
         return date;
     };

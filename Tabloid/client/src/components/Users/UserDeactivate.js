@@ -1,17 +1,17 @@
 import React from "react";
 import { Card, CardBody } from "reactstrap";
 import { useHistory } from "react-router";
-import { activateUser, getAllUsers, } from "../../modules/userManager";
+import { activateUser } from "../../modules/userManager";
 
-const DeactiveUser = ({ user }) => {
+const DeactiveUser = ({ user, getUsers }) => {
     const history = useHistory();
 
-    const handleActivate = (id) => {
-        // e.preventDefault();
+    const handleActivate = (e) => {
+        e.preventDefault();
         var confirm = window.confirm(`Are you sure you want to Activate ${user.firstName}?`);
         if (confirm) {
-            activateUser(id)
-                .then(history.push(`/userprofile`))
+            activateUser(user.id)
+                .then(() => getUsers())
         }
     }
 
@@ -24,8 +24,9 @@ const DeactiveUser = ({ user }) => {
                 <p>{user.displayName}</p>
                 <p>{user.fullName}</p>
                 <p>{user.userType.name}</p>
+                <button className="btn button btn-secondary" onClick={handleActivate}>Activate</button>
+
             </CardBody>
-            <button className="btn btn-secondary" onClick={handleActivate}>Activate</button>
         </Card>
     );
 };

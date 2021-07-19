@@ -33,8 +33,10 @@ p {
 }
 
 .button {
-  position: relative;
-  text-align: right;
+  /* position: relative; */
+  width: 7em;
+  height: 2em;
+
 }
 
 .card-details {

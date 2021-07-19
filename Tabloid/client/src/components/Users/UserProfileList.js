@@ -11,6 +11,7 @@ const UserProfileList = () => {
         getAllUsers().then(u => setUsers(u));
     };
 
+
     useEffect(() => {
         getUsers();
 
@@ -23,7 +24,7 @@ const UserProfileList = () => {
                     <button>View Deactivated</button>
                 </Link>
                 {users.map((user) => {
-                    return <UserProfile user={user} key={user.id} isSelected={isSelected} />
+                    return <UserProfile user={user} key={user.id} isSelected={isSelected} getUsers={getUsers} />
                 })}
 
             </div>
