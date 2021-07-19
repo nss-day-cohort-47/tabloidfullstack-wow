@@ -30,7 +30,7 @@ const AddTagToPost = () => {
 
     return (
         <div className="container">
-            <h1>Select Tags For Post</h1>
+            <h1>Select All Tags</h1>
 
             {tags.map((tag) => (
                 <PostTag tag={tag} key={tag.id} selectedTagIds={selectedTagIds} setSelectedTagIds={setSelectedTagIds} />
