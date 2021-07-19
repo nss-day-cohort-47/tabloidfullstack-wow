@@ -82,12 +82,12 @@ namespace Tabloid.Controllers
             _postRepository.Add(post);
             return CreatedAtAction(nameof(GetAll), new { id = post.Id }, post);
         }
-        //// PUT api/<PostController>/5
+        //// PUT Update api/<PostController>/5
         [HttpPut("{id}")]
         public IActionResult Put(int id, Post post)
         {
 
-            post.PublishDateTime = DateTime.Now;
+            //post.PublishDateTime = DateTime.Now;
             if (id != post.Id)
             {
                 return BadRequest();
@@ -103,13 +103,6 @@ namespace Tabloid.Controllers
             _postRepository.Delete(id);
                 return NoContent();
         }
-
-        //[HttpDelete("{id}")]
-        //public IActionResult Delete(int id)
-        //{
-        //    _categoryRepository.Delete(id);
-        //    return NoContent();
-        //}
 
         private string GetCurrentFirebaseUserProfileId()
         {

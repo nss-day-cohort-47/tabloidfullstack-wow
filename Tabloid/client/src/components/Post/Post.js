@@ -7,8 +7,8 @@ import { useHistory } from "react-router";
 const Post = ({ post, showEditAndDelete }) => {
     const postId = post.id
     const history = useHistory();
-    const [isLoading, setIsLoading] = useState(false);
-    const [editPost, setEditPost] = useState([]);
+    // const [isLoading, setIsLoading] = useState(false);
+    // const [editPost, setEditPost] = useState([]);
 
     const handleDeletePost = (id) => {
         if (window.confirm("are you sure you want to delete this post?"))
@@ -19,25 +19,25 @@ const Post = ({ post, showEditAndDelete }) => {
             })
         }
 
-    const handleEdit = (evt) => {
-        evt.preventDefault();
-        setIsLoading(true);
+    // const handleEdit = (evt) => {
+    //     evt.preventDefault();
+    //     setIsLoading(true);
 
 
-         const editedPost = {
-            title: editPost.title,
-            content: editPost.content,
-            headerImage: editPost.headerImage,
-            publishDateTime: editPost.publishDateTime
-        };
-        updatePost(editedPost).then((p) => {
-            history.push("/post");
-        });
-    }
+    //      const editedPost = {
+    //         title: editPost.title,
+    //         content: editPost.content,
+    //         headerImage: editPost.headerImage,
+    //         publishDateTime: editPost.publishDateTime
+    //     };
+    //     updatePost(editedPost).then((p) => {
+    //         history.push("/post");
+    //     });
+    // }
 
-    useEffect(() => {
+    // useEffect(() => {
         
-    })
+    // })
     
     }
     if (showEditAndDelete === true)
@@ -53,8 +53,9 @@ const Post = ({ post, showEditAndDelete }) => {
                     <div>              
                     <button className="btn btn-danger" onClick={() => handleDeletePost(post.id)}>Delete</button>
                     </div> 
-                    <Button className="btn btn-primary" onClick={handleEdit}>Submit</Button>
-                    <Button className="btn btn-primary" onClick={() => history.push(`/post`)}>Cancel</Button>
+                    <Link to={`/post/edit/${postId}`}>
+                    <button className="btn btn-light">Edit</button>
+                    </Link>
                 </CardBody>
             </Card>
         );

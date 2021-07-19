@@ -40,11 +40,6 @@ const PostDetails = () => {
                 <Link to={`/comment/add/${postDetails.id}`}>
                     <Button className="btn btn-success">Add Comment</Button>
                 </Link>
-                <Link>
-          
-                   
-                
-                </Link>
             </CardBody>
         </Card>
     );

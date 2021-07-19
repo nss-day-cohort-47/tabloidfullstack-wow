@@ -190,6 +190,7 @@ namespace Tabloid.Repositories
                     cmd.CommandText = @"
                         UPDATE Post 
                             SET
+                                
                                 Title = @title,
                                 Content = @content,
                                 ImageLocation = @imageLocation,
@@ -197,12 +198,12 @@ namespace Tabloid.Repositories
                                 CategoryId = @categoryId
                                 WHERE Id = @id";
 
-                    cmd.Parameters.AddWithValue("@title", post.Title);
-                    cmd.Parameters.AddWithValue("@content", post.Content);
-                    cmd.Parameters.AddWithValue("@imageLocation", DbUtils.ValueOrDBNull(post.ImageLocation));
-                    cmd.Parameters.AddWithValue("@publishDateTime", DbUtils.ValueOrDBNull(post.PublishDateTime));
-                    cmd.Parameters.AddWithValue("@categoryId", post.CategoryId);
-                    cmd.Parameters.AddWithValue("@id", post.Id);
+                    DbUtils.AddParameter(cmd, "@title", post.Title);
+                    DbUtils.AddParameter(cmd, "@content", post.Content);
+                    DbUtils.AddParameter(cmd, "@ImageLocation", post.ImageLocation);
+                    DbUtils.AddParameter(cmd, "@publishDateTime", post.PublishDateTime);
+                    DbUtils.AddParameter(cmd, "@categoryId", post.CategoryId);
+                    DbUtils.AddParameter(cmd, "@Id", post.Id);
 
                     cmd.ExecuteNonQuery();
                 }
