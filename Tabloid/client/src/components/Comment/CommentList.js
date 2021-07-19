@@ -19,7 +19,10 @@ const CommentList = () => {
     const getCommentsByPostId = () => {
         getAllCommentsByPostId(id).then((response) => setComments(response));
     }
-
+    const handleDate = () => {
+        let date = new Date(post.publishDateTime).toDateString();
+        return date;
+    };
 
 
     useEffect(() => {
@@ -35,7 +38,7 @@ const CommentList = () => {
                         <p><b>Title: </b>{post.title}</p>
                         <p><b>Image: </b>{post.headerImage}</p>
                         <p><b>Content: </b>{post.content}</p>
-                        <p><b>Date: </b>{post.publishDateTime}</p>
+                        <p><b>Date: </b>{handleDate()}</p>
                         <p><b>Author: </b>{post.userProfile?.fullName}</p>
                         <Link to={`/comment/add/${post.id}`}>
                             <Button className="btn btn-success">Add Comment</Button>

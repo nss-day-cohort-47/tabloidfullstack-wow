@@ -1,6 +1,7 @@
 import React from "react";
 import { Card, CardBody } from "reactstrap";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { useParams } from "react-router";
 import { getUserById } from "../../modules/userManager";
 
@@ -15,11 +16,10 @@ const UserProfileDetails = () => {
     }
 
     const handleDate = () => {
-
         let date = new Date(userDetails.createDateTime).toDateString();
         return date;
     };
-    const image = userDetails.imageLocation
+
 
     useEffect(() => {
         getUserDetails();
@@ -27,16 +27,17 @@ const UserProfileDetails = () => {
 
     return (
 
-        <Card >
-            <CardBody>
-                {/* {userDetails.imageLocation? } */}
-                <img src={image} />
-                <p>{userDetails.fullName}</p>
+        <Card className="card" >
+            <CardBody className="card-details">
 
-                <p>{userDetails.displayName}</p>
-                <p>{userDetails.email}</p>
-                <p>{handleDate()}</p>
-                <p>{userDetails.userType?.name}</p>
+                <img src={userDetails.imageLocation} />
+                <p><strong>Name:</strong> {userDetails.fullName}</p>
+
+                <p><strong>Display Name:</strong> {userDetails.displayName}</p>
+                <p><strong>Email:</strong> {userDetails.email}</p>
+                <p><strong>Created:</strong> {handleDate()}</p>
+                <p><strong>User Type:</strong> {userDetails.userType?.name}</p>
+                <Link to="/userprofile">Go Back</Link>
             </CardBody>
         </Card>
 

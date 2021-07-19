@@ -37,6 +37,24 @@ export const getTagById = (id) => {
     });
 };
 
+export const getAllTagsByPostId = (id) => {
+    return getToken().then((token) => {
+        return fetch(`${baseUrl}/getAllTagsByPostId/${id}`, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then(resp => {
+            if (resp.ok) {
+                return resp.json();
+            } else {
+                throw new Error("An unknown error occurred while trying to get Tags.");
+            }
+        });
+    });
+};
+
+
 export const addTag = (tag) => {
     return getToken().then((token) => {
         return fetch(baseUrl, {
@@ -55,6 +73,24 @@ export const addTag = (tag) => {
                 throw new Error("An unknown error occurred while trying to save a new tag.");
             }
         });
+    });
+};
+
+export const saveTagsToPost = (id, selectedTagIds) => {
+    return getToken().then((token) => {
+        return fetch(`${baseUrl}/AddTagsToPost`, {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ id, selectedTagIds })
+        }).then(resp => {
+            if (!resp.ok) {
+                window.alert('You are unable to add tags to this post.');
+            }
+        })
+
     });
 };
 

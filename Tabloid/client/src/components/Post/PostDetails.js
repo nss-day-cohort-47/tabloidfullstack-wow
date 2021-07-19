@@ -1,15 +1,21 @@
 import React from "react";
-import { Card, CardBody, Button } from "reactstrap";
+import { Card, CardBody, ListGroupItem, ListGroup, Button } from "reactstrap";
 import { useState, useEffect } from "react";
-import { useParams, useHistory } from "react-router";
+import { useParams } from "react-router";
 import { getPublishedPostById } from "../../modules/postManager";
 import { Link } from "react-router-dom";
+import { getAllTagsByPostId } from "../../modules/tagManager";
 
 
 const PostDetails = () => {
     const [postDetails, setPostDetails] = useState({});
+    const [tagsList, setTagsList] = useState([]);
     const { id } = useParams();
-    
+
+    const getTags = () => {
+        getAllTagsByPostId(id)
+            .then(res => setTagsList(res))
+    }
 
     const getPostDetails = () => {
         getPublishedPostById(id)
@@ -23,6 +29,7 @@ const PostDetails = () => {
     };
 
     useEffect(() => {
+        getTags();
         getPostDetails();
     }, []);
 
@@ -40,8 +47,21 @@ const PostDetails = () => {
                 <Link to={`/comment/add/${postDetails.id}`}>
                     <Button className="btn btn-success">Add Comment</Button>
                 </Link>
+                <Link to={`/tag/addtag/${postDetails.id}`}>
+                    <button>Manage Tags</button>
+                </Link>
+                <div>
+                    <strong>Tags</strong>
+                </div>
+                <ListGroup horizontal>
+                    {tagsList.map(tag => {
+                        return (
+                            <ListGroupItem className="justify-content-between">{tag.name}</ListGroupItem>
+                        )
+                    })}
+                </ListGroup>
             </CardBody>
-        </Card>
+        </Card >
     );
 };
 
