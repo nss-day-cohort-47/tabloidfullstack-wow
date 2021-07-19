@@ -14,12 +14,20 @@ const CommentCard = ({ comment, getComments }) => {
             deleteComment(comment.id).then(() => getComments());
 
         }
-    }
+
+    };
+
+    const handleDate = () => {
+        let date = new Date(comment.createDateTime).toDateString();
+        return date;
+    };
+
+
     return (
         <Card className="m-2 w-50">
             <CardBody>
                 <CardTitle>
-                    <strong>Subject: {comment.subject}  |  Author: {comment.userProfile.displayName}  |  Created On: {comment.createDateTime}</strong>
+                    <strong>Subject: {comment.subject}  |  Author: {comment.userProfile.displayName}  |  Created On: {handleDate}</strong>
                     <hr />
                 </CardTitle>
                 <CardText>
