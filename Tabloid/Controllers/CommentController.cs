@@ -26,10 +26,15 @@ namespace Tabloid.Controllers
         }
 
         // GET: api/<CommentController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        [HttpGet("Id")]
+        public IActionResult GetById(int id)
         {
-            return new string[] { "value1", "value2" };
+            var comment = _commentRepository.GetCommentById(id);
+            if (comment == null)
+            {
+                return NotFound();
+            }
+            return Ok(comment);
         }
 
         // GET api/<CommentController>/5
