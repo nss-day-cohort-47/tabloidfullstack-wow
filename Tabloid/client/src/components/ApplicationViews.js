@@ -19,6 +19,7 @@ import CommentForm from "./Comment/CommentAddForm";
 import TagEditForm from "./Tag/TagEditForm";
 import AddTagToPost from "./Tag/AddTagToPost";
 import UserProfileDetails from "./Users/UserProfileDetails";
+import CommentEditForm from "./Comment/CommentEditForm";
 import UserDeactivateList from "./Users/UserDeactivateList";
 
 export default function ApplicationViews({ isLoggedIn }) {
@@ -85,6 +86,10 @@ export default function ApplicationViews({ isLoggedIn }) {
 
         <Route path="/comment/add/:id" exact>
           {isLoggedIn ? <CommentForm /> : <Redirect to="/login" />}
+        </Route>
+
+        <Route path="/comment/edit/:id" exact>
+          {isLoggedIn ? <CommentEditForm /> : <Redirect to="/login" />}
         </Route>
 
         <Route path="/userProfile" exact>

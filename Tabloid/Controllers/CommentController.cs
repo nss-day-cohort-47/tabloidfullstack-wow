@@ -26,10 +26,15 @@ namespace Tabloid.Controllers
         }
 
         // GET: api/<CommentController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        [HttpGet("Id")]
+        public IActionResult GetById(int id)
         {
-            return new string[] { "value1", "value2" };
+            var comment = _commentRepository.GetCommentById(id);
+            if (comment == null)
+            {
+                return NotFound();
+            }
+            return Ok(comment);
         }
 
         // GET api/<CommentController>/5
@@ -53,13 +58,19 @@ namespace Tabloid.Controllers
             comment.CreateDateTime = DateTime.Now;
 
             _commentRepository.AddComment(comment);
-            return CreatedAtAction("Get", new { id = comment.Id }, comment);
+            return CreatedAtAction("GetAllByPostId", new { id = comment.Id }, comment);
         }
 
         // PUT api/<CommentController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult Put(int id, Comment comment)
         {
+            if (id != comment.Id)
+            {
+                return BadRequest();
+            }
+            _commentRepository.UpdateComment(comment);
+            return NoContent();
         }
 
         // DELETE api/<CommentController>/5
