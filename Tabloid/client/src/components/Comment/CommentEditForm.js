@@ -28,7 +28,9 @@ const CommentEditForm = () => {
             subject: editComment.subject,
             content: editComment.content
         };
-        updateComment(editedComment).then(history.push(`/comment/PostId/${editComment.postId}`))
+        updateComment(editedComment).then((res) => {
+            history.push(`/comment/PostId/${editComment.postId}`)
+        })
     }
 
 
