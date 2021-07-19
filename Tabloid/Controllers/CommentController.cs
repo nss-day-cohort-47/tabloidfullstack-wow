@@ -58,7 +58,7 @@ namespace Tabloid.Controllers
             comment.CreateDateTime = DateTime.Now;
 
             _commentRepository.AddComment(comment);
-            return CreatedAtAction("Get", new { id = comment.Id }, comment);
+            return CreatedAtAction("GetAllByPostId", new { id = comment.Id }, comment);
         }
 
         // PUT api/<CommentController>/5
