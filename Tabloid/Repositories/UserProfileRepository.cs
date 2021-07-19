@@ -68,7 +68,7 @@ namespace Tabloid.Repositories
                                                                  Email, CreateDateTime, ImageLocation, UserTypeId, Active)
                                         OUTPUT INSERTED.ID
                                         VALUES (@FirebaseUserId, @FirstName, @LastName, @DisplayName, 
-                                                @Email, @CreateDateTime, @ImageLocation, @UserTypeId, @Active)";
+                                                @Email, @CreateDateTime, @ImageLocation, @UserTypeId, 1)";
                     DbUtils.AddParameter(cmd, "@FirebaseUserId", userProfile.FirebaseUserId);
                     DbUtils.AddParameter(cmd, "@FirstName", userProfile.FirstName);
                     DbUtils.AddParameter(cmd, "@LastName", userProfile.LastName);
