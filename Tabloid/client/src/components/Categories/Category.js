@@ -8,17 +8,18 @@ const Category = ({ category, deleteCat }) => {
 
     return (
         <Card >
-            <CardBody>
+            <CardBody className="card-content-category">
                 <p>{category.name}</p>
-            </CardBody>
-            <div className="category-buttons">
-                <Link to={`/category/${category.id}`}>
-                    <button className="btn btn-primary" >Edit</button>
-                </Link>
-                <div >
-                    <button className="btn btn-primary" onClick={() => deleteCat(category.id)}>Delete</button>
+                <div className="category-buttons">
+                    <Link to={`/category/${category.id}`}>
+                        <button className="btn btn-light">Edit</button>
+                    </Link>
+
+                    <button className="btn btn-danger" onClick={() => deleteCat(category.id)}>Delete</button>
+
                 </div>
-            </div>
+            </CardBody>
+
         </Card>
     );
 };

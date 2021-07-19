@@ -27,7 +27,7 @@ const CategoryList = () => {
 
             <div className="container">
                 <Link to={`/category/add`}>
-                    <button className="btn btn-primary" >Add New Category</button>
+                    <button className="btn btn-secondary" >Add New Category</button>
                 </Link>
 
                 {categories.map((category) => (
